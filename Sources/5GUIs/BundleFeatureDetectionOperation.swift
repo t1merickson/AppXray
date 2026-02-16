@@ -286,6 +286,18 @@ final class BundleFeatureDetectionOperation: ObservableObject {
       }
     }
 
+    // --- Qt in non-standard location (e.g. Ableton: Contents/Qt/lib/) ---
+    if !detected.contains(.qt) {
+      let qtLibURL = contents.appendingPathComponent("Qt/lib")
+      let qtFiles = fm.ls(qtLibURL)
+      for filename in qtFiles {
+        if filename.hasPrefix("QtCore") && filename.hasSuffix(".framework") {
+          detected.insert(.qt)
+          break
+        }
+      }
+    }
+
     // --- Resources directory checks ---
     let resources = contents.appendingPathComponent("Resources")
 
