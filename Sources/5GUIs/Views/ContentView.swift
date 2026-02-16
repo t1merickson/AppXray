@@ -2,8 +2,6 @@
 //  ContentView.swift
 //  5 GUIs
 //
-//  Created by Helge Hess on 28.09.20.
-//
 
 import SwiftUI
 import UniformTypeIdentifiers

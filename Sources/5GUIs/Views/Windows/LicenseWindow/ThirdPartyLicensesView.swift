@@ -2,8 +2,6 @@
 //  ThirdPartyLicensesView.swift
 //  5 GUIs
 //
-//  Copyright © 2020 ZeeZide GmbH. All rights reserved.
-//
 
 import SwiftUI
 

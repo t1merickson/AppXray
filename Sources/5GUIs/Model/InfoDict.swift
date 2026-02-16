@@ -2,12 +2,8 @@
 //  InfoDict.swift
 //  5 GUIs
 //
-//  Created by Helge Hess on 28.09.20.
-//
 
-/**
- * The parsed contents of the Info.plist within an application bundle.
- */
+/// Parsed contents of an application bundle's Info.plist.
 struct InfoDict: Equatable {
 
   let id                   : String? // com.apple.Safari
@@ -20,20 +16,15 @@ struct InfoDict: Equatable {
   let supportedPlatforms   : [ String ] // MacOSX
   let minimumSystemVersion : String?
 
-  // Whether the app supports AS, not an AS app.
+  // Whether the app supports AppleScript (NSAppleScriptEnabled), not whether it is one.
   let appleScriptEnabled   : Bool
 
   let isAutomatorApplet    : Bool
   let requiresCarbon       : Bool
 
-  /**
-   * E.g. JD-GUI.
-   *
-   * The value is a dict with more info:
-   * - MainClass, JVMVersion (e.g. 1.8+), ClassPath, WorkingDirectory,
-   * - Properties (another dict), VMOptions (e.g -Xms512m)
-   */
-  let JavaX                : Bool // e.g. JD-GUI
+  /// Whether the JavaX key exists (indicates a bundled JVM app, e.g. JD-GUI).
+  /// The plist value is a dict containing MainClass, JVMVersion, ClassPath, etc.
+  let JavaX                : Bool
 
   let iconName   : String? // AppIcon
   let iconFile   : String? // AppIcon

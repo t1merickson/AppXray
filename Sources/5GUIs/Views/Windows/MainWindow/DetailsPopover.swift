@@ -2,8 +2,6 @@
 //  DetailsPopover.swift
 //  5 GUIs
 //
-//  Copyright (c) 2020 ZeeZide GmbH. All rights reserved.
-//
 
 import SwiftUI
 

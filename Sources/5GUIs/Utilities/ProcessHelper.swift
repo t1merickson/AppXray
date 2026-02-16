@@ -1,20 +1,14 @@
 //
 //  ProcessHelper.swift
-//  GetUpdateState
+//  5 GUIs
 //
-//  Created by Helge Heß on 14.11.19.
-//  Copyright © 2019-2020 ZeeZide GmbH. All rights reserved.
-//
-
-// Copied from SwiftPM Catalog
 
 import Foundation
 
 extension Process {
   
   public struct FancyResult {
-    // Note that fancy actually :-) Convenience before everything!!!
-    
+
     public let status     : Int
     public let outputData : Data
     public let errorData  : Data

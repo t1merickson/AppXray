@@ -2,8 +2,6 @@
 //  WindowEnvironmentKey.swift
 //  5 GUIs
 //
-//  Created by Helge Heß on 28.09.20.
-//
 
 import SwiftUI
 

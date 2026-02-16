@@ -2,8 +2,6 @@
 //  OTool.swift
 //  5 GUIs
 //
-//  Created by Helge Heß on 28.09.20.
-//
 
 import Foundation
 
@@ -13,10 +11,8 @@ enum OToolError: Swift.Error {
   case invocationFailed(status: Int)
 }
 
-/**
- * A compiled LLVM objdump can be bundled in the app. Use a separate Copy build
- * phase with "Executables" as the target and make sure the binary is signed.
- */
+/// Path to the bundled llvm-objdump binary. Add it via a Copy Files build
+/// phase targeting "Executables" and ensure it is signed.
 fileprivate let embeddedObjdump : URL = {
   return Bundle.main.bundleURL
     .appendingPathComponent("Contents")
@@ -25,8 +21,8 @@ fileprivate let embeddedObjdump : URL = {
 }()
 
 func otool(_ url: URL) throws -> [ String ] {
-  // xcrun doesn't work in the Sandbox but calling Xcode's objdump DOES work,
-  // on 10.15. On macOS Catalyst it doesn't.
+  // xcrun is blocked by the sandbox; Xcode's objdump works on macOS but not
+  // under Catalyst.
   let fm = FileManager.default
   
   let objdump : String
@@ -80,7 +76,7 @@ private func run(objdump: String, against url: URL,
       return fwDep
     }
     
-    // Hm, quite hacky :-)
+    // Resolve loader-relative paths to the bundle's Frameworks directory
     if dep.hasPrefix("@rpath/") {
       guard let url = checkRelname(dep.dropFirst(7)) else { continue }
       dependencyURL = url
@@ -114,7 +110,6 @@ private func run(objdump: String, against url: URL,
 }
 
 private func run(objdump: String, against url: URL) throws -> [ String ] {
-  // bash escaping
   let result = Process.launch(at: objdump,
                               with: [ "--macho", "--dylibs-used", url.path ],
                               using: .none /* no shell */)
@@ -127,11 +122,8 @@ private func run(objdump: String, against url: URL) throws -> [ String ] {
     throw OToolError.invocationFailed(status: result.status)
   }
   
-  // Example:
-  // /System/Library/PrivateFrameworks/Safari.framework/Versions/A/Safari (compatibility version 528.0.0, current version 610.1.28
-  // We parse:
-  // - deps must start with "\t" (we also accept " ")
-  // - extra version info in () is cut off
+  // Parse objdump output: each dependency line is indented and may include
+  // a parenthesized version suffix which we strip.
   return result.stdout
     .split(separator: "\n", maxSplits: 1000, omittingEmptySubsequences: true)
     .lazy

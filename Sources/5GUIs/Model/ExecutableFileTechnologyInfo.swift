@@ -2,8 +2,6 @@
 //  ExecutableFileTechnologyInfo.swift
 //  5 GUIs
 //
-//  Copyright (c) 2020 ZeeZide GmbH. All rights reserved.
-//
 
 import struct Foundation.URL
 import struct SwiftUI.Image

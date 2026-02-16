@@ -1,8 +1,6 @@
 //
 //  DetectedTechnologies.swift
-//  5GUIs
-//
-//  Created by Helge Hess on 05.10.20.
+//  5 GUIs
 //
 
 struct DetectedTechnologies: OptionSet, Sendable {

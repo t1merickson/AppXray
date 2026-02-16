@@ -1,8 +1,6 @@
 //
 //  PropertiesView.swift
-//  5GUIs
-//
-//  Created by Helge Heß on 05.10.20.
+//  5 GUIs
 //
 
 import SwiftUI

@@ -2,8 +2,6 @@
 //  BundleFeatureDetectionOperation.swift
 //  5 GUIs
 //
-//  Created by Helge Hess on 28.09.20.
-//
 
 import SwiftUI
 
@@ -11,16 +9,11 @@ protocol BundleFeatureDetectionOperationDelegate: AnyObject {
   func detectionStateDidChange(_ state: BundleFeatureDetectionOperation)
 }
 
-/**
- * This is the main "operation" object which runs from a background queue and
- * collects all the info we want.
- *
- * Detection pipeline (ordered fast to slow):
- *  1. Bundle structure scan (filesystem checks, no process spawning)
- *  2. Info.plist analysis (already loaded by Bundle)
- *  3. Dependency analysis (objdump on executable + transitive deps)
- *  4. Binary string analysis (only for Tauri/Rust when ambiguous)
- */
+/// Runs the four-phase detection pipeline on a background queue:
+///  1. Bundle structure scan (filesystem checks, no process spawning)
+///  2. Info.plist analysis (already loaded by Bundle)
+///  3. Dependency analysis (objdump on executable + transitive deps)
+///  4. Binary string analysis (only for Tauri/Rust when ambiguous)
 final class BundleFeatureDetectionOperation: ObservableObject {
 
   weak var delegate : BundleFeatureDetectionOperationDelegate?
@@ -123,18 +116,8 @@ final class BundleFeatureDetectionOperation: ObservableObject {
     applyState(.finished)
   }
 
-  /**
-   * Processes an app bundle (on a background queue).
-   *
-   * Steps:
-   * 1. Load and parse info dictionary
-   * 2. Load image
-   * 3. Scan bundle directory structure (Phase 1 -- fast)
-   * 4. Analyze Info.plist keys (Phase 2)
-   * 5. Run otool on the main executable and its dependencies (Phase 3)
-   * 6. Optionally run binary string analysis (Phase 4)
-   * 7. Scan nested applications
-   */
+  /// Processes an app bundle on a background queue. Runs all four detection
+  /// phases, loads the icon, and scans any nested applications.
   private func processWrapper(_ url: URL) {
     guard let bundle = Bundle(url: url) else {
       print("could not open bundle:", url)
