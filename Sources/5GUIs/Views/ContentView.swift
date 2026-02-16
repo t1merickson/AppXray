@@ -23,7 +23,6 @@ struct ContentView: View {
   private var url: URL? { state.url }
 
   func loadURL(_ url: URL) {
-    window?.title = url.lastPathComponent
     state.loadURL(url)
   }
 

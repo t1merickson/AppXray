@@ -103,6 +103,48 @@ extension DetectedTechnologies {
     }
   }
 
+  /// SF Symbol name for this technology (macOS 12+ / SF Symbols 3 safe).
+  var symbolName: String {
+    switch self {
+    // Apple Platform Frameworks
+    case .carbon:       return "desktopcomputer"
+    case .appkit:       return "macwindow"
+    case .automator:    return "gearshape.2"
+    case .webkit:       return "globe"
+    case .uikit:        return "iphone"
+    case .swiftui:      return "swift"
+    case .iOSOnMac:     return "apps.iphone"
+    // Third-Party Frameworks
+    case .electron:     return "bolt.fill"
+    case .catalyst:     return "arrow.triangle.2.circlepath"
+    case .qt:           return "cube"
+    case .wxWidgets:    return "macwindow.on.rectangle"
+    case .platypus:     return "doc.text"
+    case .cef:          return "globe"
+    case .flutter:      return "paintbrush"
+    case .tauri:        return "shield.lefthalf.filled"
+    case .reactNative:  return "arrow.triangle.branch"
+    case .capacitor:    return "bolt.square"
+    // Languages
+    case .objc:         return "c.square"
+    case .swift:        return "swift"
+    case .cplusplus:    return "chevron.left.forwardslash.chevron.right"
+    case .python:       return "number"
+    case .java:         return "cup.and.saucer.fill"
+    case .applescript:  return "applescript"
+    case .rust:         return "gearshape"
+    case .javascript:   return "ellipsis.curlybraces"
+    // Runtimes / Engines
+    case .unity:        return "gamecontroller"
+    case .godot:        return "gamecontroller"
+    case .unreal:       return "gamecontroller.fill"
+    case .dotnet:       return "network"
+    case .avalonia:     return "rectangle.on.rectangle"
+    case .mono:         return "square.stack.3d.up"
+    default:            return "questionmark.app"
+    }
+  }
+
   /// Returns the individual technologies present as display name strings.
   var detectedNames: [String] {
     Self.allKnown.compactMap { flag in
@@ -112,6 +154,14 @@ extension DetectedTechnologies {
 }
 
 // MARK: - Category Grouping
+
+/// A single detected technology with its display name and icon.
+struct TechnologyItem: Identifiable {
+  let flag: DetectedTechnologies
+  let name: String
+  let symbolName: String
+  var id: UInt64 { flag.rawValue }
+}
 
 extension DetectedTechnologies {
 
@@ -134,6 +184,15 @@ extension DetectedTechnologies {
   func names(in flags: [DetectedTechnologies]) -> [String] {
     flags.compactMap { flag in
       self.contains(flag) ? flag.displayName : nil
+    }
+  }
+
+  /// Returns TechnologyItem values for technologies in this set that match the given flags.
+  func items(in flags: [DetectedTechnologies]) -> [TechnologyItem] {
+    flags.compactMap { flag in
+      guard self.contains(flag),
+            let name = flag.displayName else { return nil }
+      return TechnologyItem(flag: flag, name: name, symbolName: flag.symbolName)
     }
   }
 }

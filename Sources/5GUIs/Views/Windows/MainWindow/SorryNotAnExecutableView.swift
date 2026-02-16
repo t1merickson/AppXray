@@ -12,28 +12,45 @@ struct SorryNotAnExecutableView: View {
   let url: URL
 
   var body: some View {
-    VStack(spacing: 20) {
+    VStack(spacing: 0) {
       Spacer()
 
-      Image(nsImage: NSWorkspace.shared.icon(forFile: url.path))
-        .resizable()
-        .frame(width: 64, height: 64)
+      VStack(spacing: 16) {
+        Image(nsImage: NSWorkspace.shared.icon(forFile: url.path))
+          .resizable()
+          .frame(width: 64, height: 64)
+          .opacity(0.6)
 
-      Text(verbatim: url.lastPathComponent)
-        .font(.title3)
-        .fontWeight(.medium)
+        VStack(spacing: 6) {
+          Text(verbatim: url.lastPathComponent)
+            .font(.title3)
+            .fontWeight(.medium)
+            .lineLimit(2)
 
-      Text("Not an application")
-        .font(.title2)
+          Text("Not an application")
+            .font(.body)
+            .foregroundColor(.secondary)
+        }
 
-      Text("This file doesn't appear to be a macOS application. Try dropping a .app bundle.")
-        .font(.body)
-        .foregroundColor(.secondary)
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: 360)
+        Text("Try dropping a .app bundle from /Applications.")
+          .font(.callout)
+          .foregroundColor(Color(nsColor: .tertiaryLabelColor))
+          .multilineTextAlignment(.center)
+          .frame(maxWidth: 320)
+      }
+      .padding(40)
+      .frame(maxWidth: .infinity)
+      .background(
+        RoundedRectangle(cornerRadius: 12, style: .continuous)
+          .strokeBorder(
+            Color(nsColor: .separatorColor),
+            style: StrokeStyle(lineWidth: 1.5, dash: [8, 4])
+          )
+      )
+      .padding(.horizontal, 32)
 
       Spacer()
     }
-    .padding(32)
+    .padding(24)
   }
 }
