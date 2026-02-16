@@ -7,152 +7,116 @@
 
 import SwiftUI
 
-/**
- * After all detection badges are shown, we present a summary.
- */
 struct SummaryView: View {
 
-  let info : ExecutableFileTechnologyInfo
+  let info: ExecutableFileTechnologyInfo
 
   var body: some View {
-    HStack {
-      Text(verbatim: info.summaryText)
-        .padding(16)
-    }
-    .font(.callout)
-    .foregroundColor(Color(NSColor.textColor))
-    .background(
-      RoundedRectangle(cornerRadius: 16)
-        .fill(Color(NSColor.textBackgroundColor))
-    )
+    Text(verbatim: info.summaryText)
+      .font(.callout)
+      .foregroundColor(.secondary)
+      .multilineTextAlignment(.center)
+      .padding(.top, 8)
   }
 }
 
 fileprivate struct Texts {
 
-  static let none     = "Crazy, we couldn't detect any technology?!"
-  static let fallback = "We don't have any words for this combination!"
+  static let none     = "No technologies detected."
+  static let fallback = "Could not determine the primary technology."
 
-  // Electron
   static let electronAndCatalyst =
-    "This app uses Electron AND Catalyst. What a strange combo."
+    "Uses both Electron and Catalyst."
   static let electronAndSwiftUI =
-    "Uses Electron and SwiftUI. This app might be a proper native app soon!"
+    "Uses Electron alongside SwiftUI."
   static let electron =
-    "An Electron app. Chrome under the hood, Node.js at the wheel."
+    "An Electron app. Chromium and Node.js under the hood."
 
-  // CEF
   static let cef =
-    "Uses the Chromium Embedded Framework. Chromium without the Node.js."
+    "Uses the Chromium Embedded Framework."
 
-  // Catalyst
   static let catalyst =
-    "A macOS Catalyst app, i.e. a mobile app " +
-    "longing for larger screens w/o touch (yet?)."
+    "A Mac Catalyst app. Originally built for iOS."
 
-  // iOS on Mac
   static let iOSOnMac =
-    "This is an iPhone or iPad app running on Apple silicon."
+    "An iPhone or iPad app running on Apple silicon."
 
-  // SwiftUI
   static let swiftui =
-    "SwiftUI. Respect! " +
-    "The developer of this app likes to live on the bleeding edge."
+    "A SwiftUI application."
 
-  // AppKit
   static let appKitSwift =
-    "An AppKit app. But a modern one! This app is using Swift."
+    "An AppKit app written in Swift."
   static let appKitObjC =
-    "A gem! This app looks like a trustworthy AppKit Objective-C app. " +
-    "No experiments, please!"
+    "An AppKit app written in Objective-C."
 
-  // Flutter
   static let flutter =
-    "A Flutter app. Dart code compiled to native, with its own rendering engine."
+    "A Flutter app. Dart compiled to native with its own rendering engine."
 
-  // Tauri
   static let tauri =
-    "A Tauri app. Rust backend with a native WebView frontend. Lightweight."
+    "A Tauri app. Rust backend with a native WebView frontend."
 
-  // React Native
   static let reactNative =
-    "A React Native app. JavaScript meets native views."
+    "A React Native app. JavaScript driving native views."
 
-  // Capacitor
   static let capacitor =
-    "A Capacitor/Ionic app. Web technologies in a native shell."
+    "A Capacitor app. Web technologies in a native shell."
 
-  // Qt
   static let qtPython =
-    "A Qt app written in Python. Cross-platform with a scripting twist."
+    "A Qt app written in Python."
   static let qt =
-    "Qt. A cross-platform C++ framework. Anything can happen."
+    "A Qt app. Cross-platform C++ framework."
 
-  // wxWidgets
   static let wxWidgetsPython =
-    "wxWidgets with Python. Very cross-platform!"
+    "A wxWidgets app written in Python."
   static let wxWidgets =
-    "wxWidgets. Could be Python, Perl, Ruby, or straight C++."
+    "A wxWidgets app. Cross-platform native widgets."
 
-  // Java
   static let java =
-    "Java. An actual app built using Java."
+    "A Java application."
 
-  // Python
   static let python =
-    "A Python app. Hope all indents are right."
+    "A Python application."
 
-  // Unity
   static let unity =
-    "A Unity app. Game engine territory. Mono or IL2CPP under the hood."
+    "A Unity app. Mono or IL2CPP runtime."
 
-  // Godot
   static let godot =
-    "A Godot Engine app. Open-source game development."
+    "A Godot Engine application."
 
-  // Unreal
   static let unreal =
-    "An Unreal Engine app. Heavy-duty game engine."
+    "An Unreal Engine application."
 
-  // .NET
   static let dotnet =
-    "A .NET app. The CLR runtime on macOS."
+    "A .NET application running on the CLR."
 
-  // Avalonia
   static let avalonia =
-    "An Avalonia UI app. Cross-platform .NET with a XAML-based UI."
+    "An Avalonia UI app. Cross-platform .NET with XAML."
 
-  // Mono
   static let mono =
-    "Uses Mono. The open-source .NET runtime, possibly Xamarin."
+    "Uses the Mono runtime."
 
-  // Rust
   static let rust =
-    "A Rust application. Memory-safe and fast."
+    "A Rust application."
 
-  // Automator
   static let automatorApp =
-    "An Automator app. " +
-    "We've finally found someone using that great technology!"
+    "An Automator applet."
 
-  // AppleScript
   static let applescriptApp =
-    "tell application \"#APPNAME#\" it is an AppleScript application!"
+    "An AppleScript application."
 
-  // Platypus
   static let platypusApp =
-    "#!/usr/local/bin/platypus: Looks like a script packaged with Platypus!"
+    "A script packaged with Platypus."
 }
 
 import Foundation
 
 fileprivate extension ExecutableFileTechnologyInfo {
 
-  var summaryText : String {
-    summaryTextTemplate.replacingOccurrences(of: "#APPNAME#", with: appName)
+  var summaryText: String {
+    summaryTextTemplate
   }
 
-  private var summaryTextTemplate : String {
+  private var summaryTextTemplate: String {
     let allTechnologies = self.allTechnologies
 
     func features(_ feature: DetectedTechnologies) -> Bool {
@@ -161,112 +125,64 @@ fileprivate extension ExecutableFileTechnologyInfo {
 
     if allTechnologies.isEmpty { return Texts.none }
 
-    // Electron family
     if features(.electron) {
       if features(.catalyst) { return Texts.electronAndCatalyst }
-      if features(.swift)    { return Texts.electronAndSwiftUI  }
+      if features(.swiftui)  { return Texts.electronAndSwiftUI  }
       return Texts.electron
     }
 
-    // CEF (non-Electron Chromium)
-    if features(.cef) {
-      return Texts.cef
-    }
+    if features(.cef) { return Texts.cef }
 
-    // Automator
     if (infoDictionary?.isAutomatorApplet ?? false) {
       return Texts.automatorApp
     }
 
-    // Catalyst
-    if features(.catalyst) {
-      return Texts.catalyst
-    }
+    if features(.catalyst) { return Texts.catalyst }
+    if features(.iOSOnMac) { return Texts.iOSOnMac }
 
-    // iOS on Mac
-    if features(.iOSOnMac) {
-      return Texts.iOSOnMac
-    }
-
-    // Native iPhone/iPad app (UIKit without Catalyst or iOSOnMac)
     if !features(.catalyst) && features(.uikit) && !features(.appkit)
        && !features(.iOSOnMac) {
       return Texts.iOSOnMac
     }
 
-    // Tauri
-    if features(.tauri) {
-      return Texts.tauri
-    }
+    if features(.tauri)       { return Texts.tauri       }
+    if features(.flutter)     { return Texts.flutter     }
+    if features(.reactNative) { return Texts.reactNative }
+    if features(.capacitor)   { return Texts.capacitor   }
 
-    // Flutter
-    if features(.flutter) {
-      return Texts.flutter
-    }
-
-    // React Native
-    if features(.reactNative) {
-      return Texts.reactNative
-    }
-
-    // Capacitor / Ionic
-    if features(.capacitor) {
-      return Texts.capacitor
-    }
-
-    // Game engines
     if features(.unity)  { return Texts.unity  }
     if features(.godot)  { return Texts.godot  }
     if features(.unreal) { return Texts.unreal }
 
-    // Java
-    if features(.java) {
-      return Texts.java
-    }
+    if features(.java) { return Texts.java }
 
-    // SwiftUI
-    if features(.swiftui) {
-      return Texts.swiftui
-    }
+    if features(.swiftui) { return Texts.swiftui }
 
-    // Qt
     if features(.qt) {
       if features(.python) { return Texts.qtPython }
       return Texts.qt
     }
 
-    // wxWidgets
     if features(.wxWidgets) {
       if features(.python) { return Texts.wxWidgetsPython }
       return Texts.wxWidgets
     }
 
-    // .NET family
     if features(.avalonia) { return Texts.avalonia }
     if features(.dotnet)   { return Texts.dotnet   }
     if features(.mono)     { return Texts.mono     }
 
-    // Python
-    if features(.python) {
-      return Texts.python
-    }
+    if features(.python) { return Texts.python }
+    if features(.rust)   { return Texts.rust   }
 
-    // Rust (standalone, not Tauri)
-    if features(.rust) {
-      return Texts.rust
-    }
-
-    // AppleScript
     if features(.applescript) && infoDictionary?.executable == "applet" {
       return Texts.applescriptApp
     }
 
-    // Platypus
     if features(.platypus) && !features(.swift) {
       return Texts.platypusApp
     }
 
-    // AppKit
     if features(.appkit) {
       if features(.swift) { return Texts.appKitSwift }
       return Texts.appKitObjC

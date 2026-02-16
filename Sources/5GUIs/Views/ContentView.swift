@@ -2,30 +2,31 @@
 //  ContentView.swift
 //  5 GUIs
 //
-//  Created by Helge Heß on 28.09.20.
+//  Created by Helge Hess on 28.09.20.
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ContentView: View {
-  
+
   @Environment(\.window) private var window
-  
+
   @State          private var isTargeted = false
   @ObservedObject private var stateObserver : WindowState
-  private var state = WindowState() // to keep it around? cycle or not?
-  
+  private var state = WindowState()
+
   init() {
     stateObserver = state
   }
 
-  private var url : URL? { state.url }
+  private var url: URL? { state.url }
 
   func loadURL(_ url: URL) {
     window?.title = url.lastPathComponent
     state.loadURL(url)
   }
-  
+
   private func openInNewWindow(_ url: URL) {
     let view   = ContentView()
     let window = makeAppWindow(view)
@@ -33,23 +34,23 @@ struct ContentView: View {
     view.loadURL(url)
   }
 
-  private func loadURLs(_ urls: [ URL ]) {
+  private func loadURLs(_ urls: [URL]) {
     urls.first.flatMap(loadURL)
     urls.dropFirst().forEach { openInNewWindow($0) }
   }
 
-  private func handleDrop(items: [ NSItemProvider ]) -> Bool {
+  private func handleDrop(items: [NSItemProvider]) -> Bool {
     guard !items.isEmpty else { return false }
 
     items.first.flatMap { $0.loadURL { $0.flatMap(self.loadURL) } }
-    
-    items.dropFirst().forEach { // item load is async!
+
+    items.dropFirst().forEach {
       $0.loadURL { $0.flatMap { openInNewWindow($0) } }
     }
-    
+
     return true
   }
-  
+
   private func onOpen() {
     let panel = makeOpenPanel()
     if let window = window {
@@ -63,14 +64,9 @@ struct ContentView: View {
       }
     }
   }
-  
-  private var activeGradient : LinearGradient {
-    isTargeted ? style.hoverFillGradient : style.baseFillGradient
-  }
 
   var body: some View {
     Group {
-      // TBD: can we transition between the views nicely?
       if isTargeted {
         PleaseDropAFileView()
       }
@@ -78,36 +74,23 @@ struct ContentView: View {
         SorryNotAnExecutableView(url: url)
       }
       else if let detectionState = state.detectionState {
-        MainFileView(stepper: state.fakeDetectionStepper, state: detectionState)
+        MainFileView(state: detectionState)
       }
       else {
         PleaseDropAFileView()
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    
-    .foregroundColor(style.textColor)
-    .background(activeGradient)
-    .animation(.default)
-    
-    .onDrop(of: [ UTI.fileURL.rawValue ], isTargeted: $isTargeted,
+    .animation(.default, value: state.state)
+
+    .onDrop(of: [UTType.fileURL], isTargeted: $isTargeted,
             perform: handleDrop)
-    
-    .edgesIgnoringSafeArea(.all)
-    
-    .focusable() // doesn't help w/ onCommand either?
-   
-    // we never get this?
+
+    .focusable()
     .onCommand(#selector(ResponderActions.openDocument(_:)), perform: onOpen)
   }
 }
 
 @objc protocol ResponderActions {
   func openDocument(_ sender: Any?)
-}
-
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
 }

@@ -2,27 +2,28 @@
 //  DetailsPopover.swift
 //  5 GUIs
 //
-//  Copyright © 2020 ZeeZide GmbH. All rights reserved.
+//  Copyright (c) 2020 ZeeZide GmbH. All rights reserved.
 //
 
 import SwiftUI
 
 struct DetailsPopover: View {
-  
-  let info : ExecutableFileTechnologyInfo
-  
+
+  let info: ExecutableFileTechnologyInfo
+
   private struct BundleInfoView: View {
-    
-    let info : InfoDict
-    
-    private var title : String {
-      info.displayName ?? info.name ?? info.id ?? "??"
+
+    let info: InfoDict
+
+    private var title: String {
+      info.displayName ?? info.name ?? info.id ?? "Unknown"
     }
 
     var body: some View {
       VStack {
         Text(verbatim: "Bundle: \(title)")
           .font(.callout)
+          .fontWeight(.medium)
           .padding()
 
         VStack(alignment: .leading, spacing: 4) {
@@ -35,32 +36,36 @@ struct DetailsPopover: View {
             ( "Application Category", info.applicationCategory ),
           ])
           if info.appleScriptEnabled {
-            Text("Fancy, AppleScript is enabled!")
+            Text("AppleScript enabled")
+              .font(.callout)
+              .foregroundColor(.secondary)
           }
         }
       }
-      .foregroundColor(Color(NSColor.textColor))
     }
   }
-  
+
   private struct DependenciesView: View {
-    
-    let dependencies : [ String ]
-    
+
+    let dependencies: [String]
+
     var body: some View {
       Group {
         if dependencies.isEmpty {
-          Text("No dependencies detected, yet?")
+          Text("No dependencies detected.")
+            .foregroundColor(.secondary)
         }
         else {
           VStack {
-            Text("#\(dependencies.count) Dependencies:")
+            Text("\(dependencies.count) dependencies")
               .font(.callout)
+              .fontWeight(.medium)
               .padding()
-            
+
             VStack(alignment: .leading, spacing: 2) {
               ForEach(dependencies, id: \.self) { dependency in
                 Text(verbatim: dependency)
+                  .font(.caption)
               }
             }
           }
@@ -68,12 +73,12 @@ struct DetailsPopover: View {
       }
     }
   }
-  
-  private var hasReceipt : Bool {
+
+  private var hasReceipt: Bool {
     guard let url = info.receiptURL else { return false }
     return FileManager.default.fileExists(atPath: url.path)
   }
-  
+
   var body: some View {
     VStack {
       VStack(spacing: 8) {
@@ -81,48 +86,25 @@ struct DetailsPopover: View {
           BundleInfoView(info: info)
         }
         else {
-          Text("No Bundle Info?")
+          Text("No bundle information available.")
+            .foregroundColor(.secondary)
         }
         if let url = info.executableURL {
           PropertyLine(name: "Executable", value: url.path)
         }
-        
+
         if hasReceipt {
-          Text("App has a receipt, probably downloaded from the AppStore!")
+          Text("App Store receipt present")
+            .font(.callout)
+            .foregroundColor(.secondary)
         }
       }
       .padding()
-      
+
       Divider()
-      
+
       DependenciesView(dependencies: info.dependencies)
         .padding()
     }
-  }
-}
-
-struct DetailsPopover_Previews: PreviewProvider {
-  static var previews: some View {
-    DetailsPopover(info:
-      ExecutableFileTechnologyInfo(
-        fileURL: URL(fileURLWithPath: "/Applications/Xcode.app"),
-        infoDictionary: InfoDict([
-          "CFBundleIdentifier" : "blub.blab.blum",
-          "CFBundleName"       : "VisualStudio"
-        ]),
-        executableURL: URL(fileURLWithPath:
-                       "/Applications/Xcode.app/Contents/MacOS/VisualStudio"),
-        receiptURL: nil,
-        appImage: nil,
-        dependencies: [
-          "@rpath/DVTCocoaAdditionsKit.framework/Versions/A/DVTCocoaAdditionsKit",
-          "/usr/lib/libobjc.A.dylib",
-          "/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib",
-          "/usr/lib/swift/libswiftXPC.dylib"
-        ],
-        embeddedExecutables: [],
-        detectedTechnologies: [ .appkit, .swift ]
-      )
-    )
   }
 }

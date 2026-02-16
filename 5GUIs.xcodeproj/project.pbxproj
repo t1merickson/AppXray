@@ -19,9 +19,9 @@
 		E8F1C41F25260051000B517B /* ProcessHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40525260051000B517B /* ProcessHelper.swift */; };
 		E8F1C42025260051000B517B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40625260051000B517B /* AppDelegate.swift */; };
 		E8F1C42125260051000B517B /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40825260051000B517B /* SummaryView.swift */; };
-		E8F1C42225260051000B517B /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40925260051000B517B /* SpinnerView.swift */; };
+
 		E8F1C42325260051000B517B /* PleaseDropAFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40A25260051000B517B /* PleaseDropAFileView.swift */; };
-		E8F1C42425260051000B517B /* DetectionStepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40B25260051000B517B /* DetectionStepsView.swift */; };
+
 		E8F1C42525260051000B517B /* SorryNotAnExecutableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40C25260051000B517B /* SorryNotAnExecutableView.swift */; };
 		E8F1C42625260051000B517B /* ThirdPartyLicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40D25260051000B517B /* ThirdPartyLicensesView.swift */; };
 		E8F1C42725260051000B517B /* InfoPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C40E25260051000B517B /* InfoPanel.swift */; };
@@ -30,13 +30,13 @@
 		E8F1C42A25260051000B517B /* MainFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41125260051000B517B /* MainFileView.swift */; };
 		E8F1C42B25260051000B517B /* BundleFeatureDetectionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41325260051000B517B /* BundleFeatureDetectionOperation.swift */; };
 		E8F1C42C25260051000B517B /* InfoDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41425260051000B517B /* InfoDict.swift */; };
-		E8F1C42D25260051000B517B /* FakeDetectionStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41525260051000B517B /* FakeDetectionStepper.swift */; };
-		E8F1C42E25260051000B517B /* FakeStepConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41625260051000B517B /* FakeStepConfigs.swift */; };
+
+
 		E8F1C42F25260051000B517B /* LoadBundleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41725260051000B517B /* LoadBundleImage.swift */; };
 		E8F1C43025260051000B517B /* ExecutableFileTechnologyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41825260051000B517B /* ExecutableFileTechnologyInfo.swift */; };
 		E8F1C43125260051000B517B /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41925260051000B517B /* Windows.swift */; };
 		E8F1C43225260051000B517B /* WindowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41A25260051000B517B /* WindowState.swift */; };
-		E8F1C43325260051000B517B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F1C41B25260051000B517B /* Style.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,9 +57,9 @@
 		E8F1C40525260051000B517B /* ProcessHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessHelper.swift; sourceTree = "<group>"; };
 		E8F1C40625260051000B517B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/5GUIs/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		E8F1C40825260051000B517B /* SummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
-		E8F1C40925260051000B517B /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+
 		E8F1C40A25260051000B517B /* PleaseDropAFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PleaseDropAFileView.swift; sourceTree = "<group>"; };
-		E8F1C40B25260051000B517B /* DetectionStepsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetectionStepsView.swift; sourceTree = "<group>"; };
+
 		E8F1C40C25260051000B517B /* SorryNotAnExecutableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SorryNotAnExecutableView.swift; sourceTree = "<group>"; };
 		E8F1C40D25260051000B517B /* ThirdPartyLicensesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyLicensesView.swift; sourceTree = "<group>"; };
 		E8F1C40E25260051000B517B /* InfoPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPanel.swift; sourceTree = "<group>"; };
@@ -68,13 +68,13 @@
 		E8F1C41125260051000B517B /* MainFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFileView.swift; sourceTree = "<group>"; };
 		E8F1C41325260051000B517B /* BundleFeatureDetectionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BundleFeatureDetectionOperation.swift; path = ../Sources/5GUIs/BundleFeatureDetectionOperation.swift; sourceTree = "<group>"; };
 		E8F1C41425260051000B517B /* InfoDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDict.swift; sourceTree = "<group>"; };
-		E8F1C41525260051000B517B /* FakeDetectionStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeDetectionStepper.swift; sourceTree = "<group>"; };
-		E8F1C41625260051000B517B /* FakeStepConfigs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeStepConfigs.swift; sourceTree = "<group>"; };
+
+
 		E8F1C41725260051000B517B /* LoadBundleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadBundleImage.swift; sourceTree = "<group>"; };
 		E8F1C41825260051000B517B /* ExecutableFileTechnologyInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutableFileTechnologyInfo.swift; sourceTree = "<group>"; };
 		E8F1C41925260051000B517B /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Windows.swift; path = Sources/5GUIs/Windows.swift; sourceTree = SOURCE_ROOT; };
 		E8F1C41A25260051000B517B /* WindowState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WindowState.swift; path = Sources/5GUIs/WindowState.swift; sourceTree = SOURCE_ROOT; };
-		E8F1C41B25260051000B517B /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Style.swift; path = Sources/5GUIs/Style.swift; sourceTree = SOURCE_ROOT; };
+
 		E8F1C437252600A9000B517B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E8F1C438252603B5000B517B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = Sources/5GUIs/README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -112,7 +112,7 @@
 			children = (
 				E8F1C438252603B5000B517B /* README.md */,
 				E8F1C40625260051000B517B /* AppDelegate.swift */,
-				E8F1C41B25260051000B517B /* Style.swift */,
+
 				E8F1C41A25260051000B517B /* WindowState.swift */,
 				E8F1C41925260051000B517B /* Windows.swift */,
 				E8F1C41325260051000B517B /* BundleFeatureDetectionOperation.swift */,
@@ -177,8 +177,8 @@
 				E88C60C5252B482B008B3272 /* DetectedTechnologies.swift */,
 				E8F1C41825260051000B517B /* ExecutableFileTechnologyInfo.swift */,
 				E8F1C41425260051000B517B /* InfoDict.swift */,
-				E8F1C41525260051000B517B /* FakeDetectionStepper.swift */,
-				E8F1C41625260051000B517B /* FakeStepConfigs.swift */,
+
+
 				E8F1C41725260051000B517B /* LoadBundleImage.swift */,
 			);
 			name = Model;
@@ -188,7 +188,7 @@
 		E8F1C43A252615B2000B517B /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				E8F1C40925260051000B517B /* SpinnerView.swift */,
+
 				E8E01B6E252B6A8A005B7CCF /* PropertiesView.swift */,
 			);
 			path = Reusable;
@@ -219,7 +219,7 @@
 				E8F1C40C25260051000B517B /* SorryNotAnExecutableView.swift */,
 				E8F1C41125260051000B517B /* MainFileView.swift */,
 				E8F1C40825260051000B517B /* SummaryView.swift */,
-				E8F1C40B25260051000B517B /* DetectionStepsView.swift */,
+
 				E8F1C40F25260051000B517B /* DetailsPopover.swift */,
 			);
 			path = MainWindow;
@@ -330,14 +330,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8F1C41C25260051000B517B /* OTool.swift in Sources */,
-				E8F1C42E25260051000B517B /* FakeStepConfigs.swift in Sources */,
 				E8F1C43225260051000B517B /* WindowState.swift in Sources */,
 				E8F1C41F25260051000B517B /* ProcessHelper.swift in Sources */,
 				E8F1C42925260051000B517B /* ContentView.swift in Sources */,
 				E8F1C43025260051000B517B /* ExecutableFileTechnologyInfo.swift in Sources */,
 				E88C60C6252B482B008B3272 /* DetectedTechnologies.swift in Sources */,
 				E8F1C42C25260051000B517B /* InfoDict.swift in Sources */,
-				E8F1C43325260051000B517B /* Style.swift in Sources */,
 				E8F1C42F25260051000B517B /* LoadBundleImage.swift in Sources */,
 				E8F1C42B25260051000B517B /* BundleFeatureDetectionOperation.swift in Sources */,
 				E8F1C42825260051000B517B /* DetailsPopover.swift in Sources */,
@@ -348,11 +346,8 @@
 				E8F1C41D25260051000B517B /* WindowEnvironmentKey.swift in Sources */,
 				E8F1C42125260051000B517B /* SummaryView.swift in Sources */,
 				E8F1C42625260051000B517B /* ThirdPartyLicensesView.swift in Sources */,
-				E8F1C42D25260051000B517B /* FakeDetectionStepper.swift in Sources */,
-				E8F1C42425260051000B517B /* DetectionStepsView.swift in Sources */,
 				E8E01B6F252B6A8A005B7CCF /* PropertiesView.swift in Sources */,
 				E8F1C42A25260051000B517B /* MainFileView.swift in Sources */,
-				E8F1C42225260051000B517B /* SpinnerView.swift in Sources */,
 				E8F1C42325260051000B517B /* PleaseDropAFileView.swift in Sources */,
 				E8F1C42525260051000B517B /* SorryNotAnExecutableView.swift in Sources */,
 			);
@@ -423,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -478,7 +473,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -495,11 +490,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = 5GUIs/_GUIs.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"5GUIs/Preview Content\"";
-				DEVELOPMENT_TEAM = 4GXF3JAMM4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = 5GUIs/Info.plist;
@@ -507,7 +503,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.zeezide.swift.five-guis";
 				PRODUCT_MODULE_NAME = FiveGUIs;
@@ -525,11 +521,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = 5GUIs/_GUIs.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"5GUIs/Preview Content\"";
-				DEVELOPMENT_TEAM = 4GXF3JAMM4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = 5GUIs/Info.plist;
@@ -537,7 +534,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.zeezide.swift.five-guis";
 				PRODUCT_MODULE_NAME = FiveGUIs;

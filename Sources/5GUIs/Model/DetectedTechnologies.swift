@@ -110,3 +110,30 @@ extension DetectedTechnologies {
     }
   }
 }
+
+// MARK: - Category Grouping
+
+extension DetectedTechnologies {
+
+  static let frameworkFlags: [DetectedTechnologies] = [
+    .appkit, .uikit, .swiftui, .webkit, .carbon, .automator,
+    .electron, .catalyst, .qt, .wxWidgets, .cef, .flutter,
+    .tauri, .reactNative, .capacitor, .platypus, .iOSOnMac,
+  ]
+
+  static let languageFlags: [DetectedTechnologies] = [
+    .objc, .swift, .cplusplus, .python, .java, .applescript,
+    .rust, .javascript,
+  ]
+
+  static let runtimeFlags: [DetectedTechnologies] = [
+    .unity, .godot, .unreal, .dotnet, .avalonia, .mono,
+  ]
+
+  /// Returns display names for technologies in this set that match the given flags.
+  func names(in flags: [DetectedTechnologies]) -> [String] {
+    flags.compactMap { flag in
+      self.contains(flag) ? flag.displayName : nil
+    }
+  }
+}
