@@ -2,14 +2,14 @@
 //  InfoDict.swift
 //  5 GUIs
 //
-//  Created by Helge Heß on 28.09.20.
+//  Created by Helge Hess on 28.09.20.
 //
 
 /**
  * The parsed contents of the Info.plist within an application bundle.
  */
 struct InfoDict: Equatable {
-  
+
   let id                   : String? // com.apple.Safari
   let name                 : String? // Safari
   let displayName          : String? // Safari
@@ -19,13 +19,13 @@ struct InfoDict: Equatable {
   let applicationCategory  : String?
   let supportedPlatforms   : [ String ] // MacOSX
   let minimumSystemVersion : String?
-  
+
   // Whether the app supports AS, not an AS app.
   let appleScriptEnabled   : Bool
-  
+
   let isAutomatorApplet    : Bool
   let requiresCarbon       : Bool
-  
+
   /**
    * E.g. JD-GUI.
    *
@@ -34,16 +34,19 @@ struct InfoDict: Equatable {
    * - Properties (another dict), VMOptions (e.g -Xms512m)
    */
   let JavaX                : Bool // e.g. JD-GUI
-  
+
   let iconName   : String? // AppIcon
   let iconFile   : String? // AppIcon
-  
+
   let executable : String? // Safari
-  
-  // TODO: services?
-  // CFBundleURLTypes
-  // CFBundleDocumentTypes
-  
+
+  // Extended detection keys
+  let electronAsarIntegrity : Bool     // ElectronAsarIntegrity dict exists
+  let electronTeamID        : String?  // ElectronTeamID
+  let platformName          : String?  // DTPlatformName (e.g. "iphoneos", "macosx")
+  let deviceFamily          : [Int]    // UIDeviceFamily (1 = iPhone, 2 = iPad)
+  let minimumOSVersion      : String?  // MinimumOSVersion (iOS-style, not LSMinimumSystemVersion)
+
   init(_ dictionary: [ String : Any ]) {
     func S(_ key: String) -> String? {
       guard let s = dictionary[key] as? String else { return nil }
@@ -58,7 +61,7 @@ struct InfoDict: Equatable {
       }
       return false
     }
-    
+
     id                   = S("CFBundleIdentifier")
     name                 = S("CFBundleName")
     info                 = S("CFBundleGetInfoString")
@@ -76,10 +79,17 @@ struct InfoDict: Equatable {
     appleScriptEnabled   = B("NSAppleScriptEnabled")
     isAutomatorApplet    = B("AMIsApplet")
     requiresCarbon       = B("LSRequiresCarbon")
-    
+
     supportedPlatforms = dictionary["CFBundleSupportedPlatforms"] as? [ String ]
                       ?? []
-    
+
     JavaX = dictionary["JavaX"] != nil
+
+    // Extended keys
+    electronAsarIntegrity = dictionary["ElectronAsarIntegrity"] != nil
+    electronTeamID        = S("ElectronTeamID")
+    platformName          = S("DTPlatformName")
+    minimumOSVersion      = S("MinimumOSVersion")
+    deviceFamily          = dictionary["UIDeviceFamily"] as? [Int] ?? []
   }
 }

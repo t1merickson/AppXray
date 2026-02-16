@@ -2,64 +2,64 @@
 //  FakeStepConfigs.swift
 //  5 GUIs
 //
-//  Copyright © 2020 ZeeZide GmbH. All rights reserved.
+//  Copyright (c) 2020 ZeeZide GmbH. All rights reserved.
 //
 
 /**
  * The data for the configurations which show up as badges in the UI,
- * i.e. the 5 features (GUI frameworks) we test.
+ * i.e. the features (GUI frameworks) we test.
  *
  * Note that there are also `FakeStep`s, which also contain the info
  * whether or not the feature is available or not.
  */
 struct FakeStepConfig : Equatable, Identifiable {
-  
+
   let id                : Int
   let runTitle          : String
   let positiveTitle     : String
   let positiveCheckmark : String
   let negativeTitle     : String
   let negativeCheckmark : String
-  
+
   static let electron = FakeStepConfig(
     id                : 1,
-    runTitle          : "Checking for Electron …",
-    positiveTitle     : "App is ⚛️ Electronized! The Web is going to take over!",
-    positiveCheckmark : "🙈",
-    negativeTitle     : "No ⚛️ Electrons detected, GPU & RAM are secure.",
-    negativeCheckmark : "✅"
+    runTitle          : "Checking for Electron ...",
+    positiveTitle     : "Electron detected. Chromium and Node.js inside.",
+    positiveCheckmark : "[!]",
+    negativeTitle     : "No Electron detected.",
+    negativeCheckmark : "[ok]"
   )
   static let catalyst = FakeStepConfig(
     id                : 2,
-    runTitle          : "Catalyzed? …",
-    positiveTitle     : "Uses macOS 🧪 Catalyst, don't resize windows!",
-    positiveCheckmark : "🙉",
-    negativeTitle     : "No 🧪 Catalysts detected. Fast windows resizing.",
-    negativeCheckmark : "✅"
+    runTitle          : "Checking for Catalyst ...",
+    positiveTitle     : "Uses macOS Catalyst. A mobile app on the desktop.",
+    positiveCheckmark : "[!]",
+    negativeTitle     : "No Catalyst detected.",
+    negativeCheckmark : "[ok]"
   )
   static let swiftUI = FakeStepConfig(
     id                : 3,
-    runTitle          : "Maybe declarative? …",
-    positiveTitle     : "App is using SwiftUI, that can be ❡ declared.",
-    positiveCheckmark : "🙊",
-    negativeTitle     : "Nothing seems to be “declared” ❡ No SwiftUI in use.",
-    negativeCheckmark : "❌"
+    runTitle          : "Checking for SwiftUI ...",
+    positiveTitle     : "SwiftUI detected. Declarative and modern.",
+    positiveCheckmark : "[*]",
+    negativeTitle     : "No SwiftUI in use.",
+    negativeCheckmark : "[-]"
   )
   static let phone = FakeStepConfig(
     id                : 4,
-    runTitle          : "Possibly an iPhone application? …",
-    positiveTitle     : "This looks like an 📱 iPhone or iPad app!",
-    positiveCheckmark : "📱",
-    negativeTitle     : "Not an 📱 iPhone app. Those don't belong here.",
-    negativeCheckmark : "✅"
+    runTitle          : "Checking for iOS app ...",
+    positiveTitle     : "This is an iPhone or iPad app running on Mac.",
+    positiveCheckmark : "[!]",
+    negativeTitle     : "Not an iOS app.",
+    negativeCheckmark : "[ok]"
   )
   static let appKit = FakeStepConfig(
     id                : 5,
-    runTitle          : "Checking for old-school AppKit …",
-    positiveTitle     : "What to expect, indeed this app uses 🖥 AppKit!",
-    positiveCheckmark : "👨🏽‍🦳",
-    negativeTitle     : "No 👨🏽‍🦳 AppKit usage to be found? 🤔",
-    negativeCheckmark : "❌"
+    runTitle          : "Checking for AppKit ...",
+    positiveTitle     : "AppKit detected. Classic macOS native.",
+    positiveCheckmark : "[*]",
+    negativeTitle     : "No AppKit detected.",
+    negativeCheckmark : "[-]"
   )
 
   static let all : [ FakeStepConfig ] = [
@@ -68,29 +68,27 @@ struct FakeStepConfig : Equatable, Identifiable {
 }
 
 extension ExecutableFileTechnologyInfo {
-  
-  /// Our "5 GUIs"
+
+  /// The "5 GUIs" badge analysis results.
   var analysisResults : [ FakeStep ] {
-    let allTechnologies =
-      self.detectedTechnologies.union(self.embeddedTechnologies)
+    let allTechs = self.allTechnologies
 
     func make(_ feature : DetectedTechnologies, _ config  : FakeStepConfig)
          -> FakeStep
     {
-      .init(config: config, state: allTechnologies.contains(feature))
+      .init(config: config, state: allTechs.contains(feature))
     }
-    
-    // This doesn't work on macOS BS:
-    // https://github.com/ZeeZide/5GUIs/issues/3
-    let isPhone = allTechnologies.contains(.uikit)
-             && !(allTechnologies.contains(.catalyst))
-    
+
+    let isPhone = allTechs.contains(.uikit)
+             && !(allTechs.contains(.catalyst))
+             || allTechs.contains(.iOSOnMac)
+
     return [
       make(.electron, .electron),
       make(.catalyst, .catalyst),
       make(.swiftui,  .swiftUI),
       .init(config: .phone, state: isPhone),
-      make(.appkit, .appKit) // TBD: only report if others don't match?
+      make(.appkit, .appKit)
     ]
   }
 }
