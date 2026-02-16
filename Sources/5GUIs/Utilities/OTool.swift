@@ -116,7 +116,7 @@ private func run(objdump: String, against url: URL,
 private func run(objdump: String, against url: URL) throws -> [ String ] {
   // bash escaping
   let result = Process.launch(at: objdump,
-                              with: [ "-macho", "--dylibs-used", url.path ],
+                              with: [ "--macho", "--dylibs-used", url.path ],
                               using: .none /* no shell */)
   guard result.status == 0 else {
     // status is 4 on signing errors (illegal instruction)
