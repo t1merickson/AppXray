@@ -8,6 +8,11 @@
 import SwiftUI
 
 func makeAppWindow<V: View>(_ contentView: V) -> NSWindow {
+  let minW: CGFloat = 400
+  let maxW: CGFloat = 600
+  let minH: CGFloat = 400
+  let maxH: CGFloat = 1200
+
   let window = NSWindow(
     contentRect: NSRect(x: 0, y: 0, width: 500, height: 600),
     styleMask: [
@@ -16,18 +21,24 @@ func makeAppWindow<V: View>(_ contentView: V) -> NSWindow {
     backing: .buffered, defer: false
   )
 
+  window.minSize = NSMakeSize(minW, minH)
+  window.maxSize = NSMakeSize(maxW, maxH)
   window.title = "5 GUIs"
   window.isMovableByWindowBackground = true
   window.isReleasedWhenClosed = true
   window.center()
   window.setFrameAutosaveName("5GUIs")
-  window.minSize = NSMakeSize(400, 400)
+
+  // Clamp restored frame to current constraints
+  var frame = window.frame
+  frame.size.width  = min(max(frame.size.width, minW), maxW)
+  frame.size.height = min(max(frame.size.height, minH), maxH)
+  window.setFrame(frame, display: false)
 
   window.contentView = NSHostingView(
     rootView: contentView
       .environment(\.window, window)
   )
-  window.makeFirstResponder(window.contentView)
   return window
 }
 
@@ -44,7 +55,7 @@ func makeOpenPanel() -> NSOpenPanel {
 
 func makeInfoPanel<V: View>(_ contentView: V) -> NSWindow {
   let window = NSWindow(
-    contentRect: NSRect(x: 0, y: 0, width: 480, height: 400),
+    contentRect: NSRect(x: 0, y: 0, width: 340, height: 0),
     styleMask: [
       .closable, .titled
     ],

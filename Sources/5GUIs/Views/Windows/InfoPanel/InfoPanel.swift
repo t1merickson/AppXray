@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-fileprivate let licenseWindow =
-  makeLicenseWindow(ThirdPartyLicensesView())
-
 struct InfoPanel: View {
 
   var body: some View {
@@ -19,32 +16,45 @@ struct InfoPanel: View {
         .frame(width: 64, height: 64)
         .padding(.top)
 
-      Text("5 GUIs")
-        .font(.title)
-        .fontWeight(.medium)
+      VStack(spacing: 4) {
+        Text("5 GUIs")
+          .font(.title2)
+          .fontWeight(.semibold)
+
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+          Text("Version \(version)")
+            .font(.callout)
+            .foregroundColor(.secondary)
+        }
+      }
 
       Text(
-        "Analyzes macOS applications to detect their underlying technologies. " +
-        "Scans app bundles, checks linked libraries with LLVM objdump, and " +
-        "identifies frameworks, languages, and runtimes including Electron, " +
-        "SwiftUI, Qt, Flutter, Unity, and more."
+        "Drop any macOS application to see what makes it tick. " +
+        "5 GUIs scans the app bundle structure, linked libraries, " +
+        "and binary contents to identify frameworks like Electron, SwiftUI, " +
+        "and Qt, languages like Swift, Objective-C, and Rust, " +
+        "and runtimes like Unity and .NET."
       )
-        .font(.body)
+        .font(.callout)
         .foregroundColor(.secondary)
         .multilineTextAlignment(.center)
-        .frame(maxWidth: 400)
-
-      Spacer()
+        .frame(maxWidth: 380)
+        .fixedSize(horizontal: false, vertical: true)
 
       Button("Third-Party Licenses") {
-        licenseWindow.makeKeyAndOrderFront(nil)
+        NSApp.sendAction(#selector(InfoPanelActions.showLicenses(_:)), to: nil, from: nil)
       }
+      .padding(.top, 4)
 
       Text("Based on 5 GUIs by ZeeZide GmbH")
         .font(.caption)
         .foregroundColor(.secondary)
     }
     .padding(24)
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .frame(width: 340)
   }
+}
+
+@objc protocol InfoPanelActions {
+  func showLicenses(_ sender: Any?)
 }

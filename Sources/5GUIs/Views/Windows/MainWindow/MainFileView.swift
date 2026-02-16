@@ -17,11 +17,7 @@ struct MainFileView: View {
   private var info: ExecutableFileTechnologyInfo { state.info }
 
   private var subtitleText: String {
-    let filename = info.fileURL.lastPathComponent
-    if info.platformType != .unknown {
-      return "\(filename) \u{2014} \(info.platformType.rawValue)"
-    }
-    return filename
+    info.fileURL.lastPathComponent
   }
 
   var body: some View {

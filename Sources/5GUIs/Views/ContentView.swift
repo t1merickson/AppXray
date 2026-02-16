@@ -79,17 +79,10 @@ struct ContentView: View {
         PleaseDropAFileView()
       }
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .frame(minWidth: 400, maxWidth: 600, minHeight: 400, maxHeight: .infinity)
     .animation(.default, value: state.state)
 
     .onDrop(of: [UTType.fileURL], isTargeted: $isTargeted,
             perform: handleDrop)
-
-    .focusable()
-    .onCommand(#selector(ResponderActions.openDocument(_:)), perform: onOpen)
   }
-}
-
-@objc protocol ResponderActions {
-  func openDocument(_ sender: Any?)
 }
