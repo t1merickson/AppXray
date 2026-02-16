@@ -3,44 +3,81 @@
            align="right" width="128" height="128" />
 </h2>
 
-Reminder: This is a quick 2-day hack, not a beautiful and cleaned up thing ...
-Cleanup PRs are welcome!
+Architecture guide for the 5 GUIs codebase.
 
-The app is a macOS SwiftUI v1 app, built on macOS 10.15. 
-Means: It uses an AppDelegate and creates the windows using AppKit.
-The default storyboard is used for menus.
-
-The state of a main window is represented in that `WindowState`
-ObservableObject. It is the main driver.
-This hooks into `BundleFeatureDetectionOperation`. Some states are dupe. TBF.
-
-The `Model` directory contains a wild mixture of actual models, and what one might
-call a ViewModel.
-
-The `Views` directory contains all the SwiftUI Views. 
-Some more generic, but mostly just hacked together to get the app out of the door.
-
-`Utilities` contains, you can guess it.
-
-### UI
-
-- there is a spinner, but it is not really necessary, a detection runs very fast ...
-  (might change once we scan nested, as in Issue #1)
-- the badges which come up in a progress style manner are just fake, with their own
-  fake progress model and observable driver object :-)
-  - Note: Let's keep the steps to 5 (i.e. no extra steps for Qt or wxWindows)
-- the fancy summary texts are selected in `Views/Windows/MainView/SummaryView`,
-  more combinations and even fancier texts are very welcome.
+The app uses an AppKit lifecycle: `AppDelegate` creates windows with `NSWindow`/`NSHostingView`, and a storyboard (`Main.storyboard`) provides the menu bar. All views are SwiftUI, targeting macOS 12+.
 
 
-### Contact
+### Directory layout
 
-Any questions? Just ask! :-)
+```
+Sources/5GUIs/
+  AppDelegate.swift              App lifecycle, window management, menu actions
+  WindowState.swift              Per-window state machine (empty/loading/notAnApp/app)
+  Windows.swift                  NSWindow factory functions
+  BundleFeatureDetectionOperation.swift   Four-phase detection pipeline
+
+  Model/
+    DetectedTechnologies.swift   OptionSet of 30 technology flags + display names + SF Symbol mappings
+    ExecutableFileTechnologyInfo.swift   Aggregated results for a scanned bundle
+    InfoDict.swift               Info.plist wrapper
+    LoadBundleImage.swift        App icon loading
+
+  Utilities/
+    OTool.swift                  Runs llvm-objdump, parses linked libraries
+    ProcessHelper.swift          Subprocess execution
+    URLItems.swift               Drag-and-drop URL extraction (UTType)
+    WindowEnvironmentKey.swift   SwiftUI environment key for the hosting NSWindow
+
+  Views/
+    ContentView.swift            Root view: drag-drop target + state routing
+    Reusable/
+      PropertiesView.swift       Key-value list used in the details popover
+    Windows/
+      InfoPanel/
+        InfoPanel.swift          About panel (version, description, license link)
+      LicenseWindow/
+        ThirdPartyLicensesView.swift
+      MainWindow/
+        MainFileView.swift       Results screen: app header + technology sections + summary
+        PleaseDropAFileView.swift   Empty state with dashed drop zone
+        SorryNotAnExecutableView.swift   Error state for non-app files
+        SummaryView.swift        One-line natural language summary of results
+        DetailsPopover.swift     Bundle info + dependency list popover
+```
 
 
-### Who
+### Detection engine
 
-**5 GUIs** is brought to you by
-[ZeeZide](http://zeezide.de).
-We like feedback, GitHub stars, cool contract work,
-presumably any form of praise you can think of.
+`BundleFeatureDetectionOperation` runs on a background queue and reports state changes back to the main thread via a delegate protocol. The four detection phases run in order:
+
+1. **Bundle structure** -- checks for known framework/resource paths on disk
+2. **Info.plist** -- reads bundle metadata for SDK, scripting, and platform identifiers
+3. **Dependency analysis** -- runs `llvm-objdump --macho --dylibs-used` on the main executable and recursively on embedded frameworks
+4. **Binary strings** -- searches raw binary content when library analysis is ambiguous (e.g. Tauri binaries that statically link Rust)
+
+Results accumulate in a `DetectedTechnologies` OptionSet (UInt64 bitmask, 30 flags). Each flag has a `displayName` and `symbolName` (SF Symbol) for the UI.
+
+
+### Window state flow
+
+Each main window owns a `WindowState` (ObservableObject) that drives `ContentView`:
+
+```
+.empty  -->  .loading(url)  -->  .app(info)
+                             \-> .notAnApp(url)
+```
+
+`ContentView` switches between `PleaseDropAFileView`, a `ProgressView`, `MainFileView`, or `SorryNotAnExecutableView` based on the current state.
+
+
+### Results UI
+
+`MainFileView` shows a horizontal app header (icon + name + bundle filename), then groups detected technologies into sections (Frameworks, Languages, Runtimes). Each section is a rounded-rect card with individual `TechnologyRow` views showing an SF Symbol icon and technology name. A `SummaryView` at the bottom provides a one-line natural language description.
+
+Technology grouping is defined by static arrays on `DetectedTechnologies` (`frameworkFlags`, `languageFlags`, `runtimeFlags`). The `items(in:)` method filters to only present flags and returns `TechnologyItem` structs for the view.
+
+
+### About panel and license window
+
+`InfoPanel` is a content-sized SwiftUI view (fixed width 340, height auto-sizes). The "Third-Party Licenses" button uses `NSApp.sendAction` through the responder chain to reach `AppDelegate.showLicenses(_:)`, which owns the license window as a lazy property.

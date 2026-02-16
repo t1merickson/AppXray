@@ -1,94 +1,51 @@
-<h2>The 5 GUIs Application
+<h2>5 GUIs
   <img src="5GUIs/Assets.xcassets/AppIcon.appiconset/5GUIs-256.png"
            align="right" width="128" height="128" />
 </h2>
 
-... the app for the [tweet](https://twitter.com/jckarter/status/1310412969289773056):
+Drop any macOS application to see what makes it tick.
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">With its eclectic mix of AppKit, Catalyst, iOS, SwiftUI, and web apps, macOS should consider rebranding to “Five GUIs”</p>&mdash; Joe Groff (@jckarter) <a href="https://twitter.com/jckarter/status/1310412969289773056?ref_src=twsrc%5Etfw">September 28, 2020</a></blockquote>
+5 GUIs scans app bundle structure, linked libraries, and binary contents to identify the frameworks, languages, and runtimes behind any `.app`.
 
-GUI is an abbreviation for [Graphical User Interface](https://en.wikipedia.org/wiki/Graphical_user_interface).
+### What it detects
 
-<a href="https://apps.apple.com/us/app/id1534164621">
-  <img src="https://zeezide.com/img/apple/Download_on_the_App_Store_Badge_US-UK_135x40 Canvas.png"> 
-</a>  
+| Category | Technologies |
+|----------|-------------|
+| **Frameworks** | AppKit, UIKit, SwiftUI, WebKit, Carbon, Automator, Electron, Mac Catalyst, Qt, wxWidgets, CEF, Flutter, Tauri, React Native, Capacitor, Platypus |
+| **Languages** | Swift, Objective-C, C++, Python, Java, AppleScript, Rust, JavaScript |
+| **Runtimes** | Unity, Godot, Unreal Engine, .NET, Avalonia, Mono |
 
-<img src="https://zeezide.com/img/5guis/screenshots/appwindow/5guis-drop-it.png"
-     width="24%" />
-<img src="https://zeezide.com/img/5guis/screenshots/appwindow/5guis-marzipan.png"
-     width="24%" />
-<img src="https://zeezide.com/img/5guis/screenshots/appwindow/5guis-companion.png"
-     width="24%" />
-<img src="https://zeezide.com/img/5guis/screenshots/appwindow/5guis-automator.png"
-     width="24%" />
+Results are grouped by category, with each detected technology listed individually with its own icon.
 
 
 ### How it works
 
-[5 GUIs](https://zeezide.com/en/products/5guis/index.html) 
-first grabs some information from the app bundle. 
-It then uses [LLVM](https://llvm.org)'s 
-[`objdump`](https://en.wikipedia.org/wiki/Objdump) 
-to check what libraries the app links,
-e.g. [Electron](https://www.electronjs.org) or 
-[UIKit](https://developer.apple.com/documentation/uikit), to figure out what technology is being used.
+Detection runs through a four-phase pipeline, ordered from fast to slow:
 
-[5 GUIs](https://zeezide.com/en/products/5guis/index.html) 
-itself is a [SwiftUI](https://developer.apple.com/xcode/swiftui/) 1
-macOS application (i.e. it runs on Catalina and macOS BS).
+1. **Bundle structure scan** -- filesystem checks for known paths (e.g. `Frameworks/Electron Framework.framework`, `Resources/flutter_assets`)
+2. **Info.plist analysis** -- reads the bundle's property list for identifiers like `LSUIElement`, `DTSDKName`, and `NSAppleScriptEnabled`
+3. **Dependency analysis** -- runs LLVM [`objdump`](https://en.wikipedia.org/wiki/Objdump) on the main executable and walks transitive dependencies looking for linked frameworks and libraries
+4. **Binary string analysis** -- searches for embedded strings as a last resort (currently used for Tauri/Rust when library linking is ambiguous)
+
+5 GUIs itself is a SwiftUI macOS application using an AppKit lifecycle (AppDelegate + storyboard menus). It targets macOS 12+.
 
 
-### Idea and Implementation
-
-The idea for this kind of app exists for quite some time, but when 
-[@jckarter](https://twitter.com/jckarter)
-tweeted the proper name for this: “5 GUIs”, it finally had to be done.
-
-This is a quick hack, put together in about 2 days. 
-The source is not “nice” at all, don't use it as a proper example 🙈
-PRs with cleanups are warmly welcome.
-
-
-### Help wanted!
-
-All improvements are very welcome, but most of all this app could use better
-design. 
-SwiftUI gives you something OKayish looking out of the box, but if someone
-has the time to add some fancy animations, 
-better colors, iconography and styling, 
-that would be *very* welcome!
-
-Also checkout the [Issues](/ZeeZide/5GUIs/issues) page of this repository. 
-It'll have some.
-
-
-### 3rd Party Software Used
+### 3rd party software
 
 - LLVM objdump: [license](LLVM/LLVM-LICENSE.TXT)
 
 
-### Building the Project in Xcode
+### Building
 
-Before the app can be build, an `llvm-objdump` binary needs to be put into
-the `LLVM` folder (the binary was a little big for inclusion in the repository).
+An `llvm-objdump` binary needs to be present in the `LLVM` folder before building. The binary bundled with Xcode works fine for development:
 
-For testing purposes the one included in Xcode should be fine,
-it should be living over here:
-`/Applications/Xcode.app//Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-objdump`.
+```
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-objdump
+```
 
-For deployment it is probably better to build an own one. 
-To do so:
-- grab the LLVM source code from the 
-  [downloads page](https://releases.llvm.org/download.html#10.0.1)
-- Unpack it somewhere, e.g.: `cd /tmp; && tar zxf llvm-10.0.1.src.tar.xz`
-- Create a build dir: `mkdir /tmp/build-dir && cd /tmp/build-dir`
-- Create the makefiles: `cmake ../llvm-10.0.1.src/`
-- Build it: `cd tools/llvm-objdump && cmake --build .`
+Copy or symlink it into `LLVM/`, then open `5GUIs.xcodeproj` and build.
 
 
-### Who
+### Origin
 
-**5 GUIs** is brought to you by
-[ZeeZide](http://zeezide.de).
-We like feedback, GitHub stars, cool contract work,
-presumably any form of praise you can think of.
+Based on the original [5 GUIs](https://zeezide.com/en/products/5guis/index.html) by [ZeeZide](http://zeezide.de), inspired by [Joe Groff's tweet](https://twitter.com/jckarter/status/1310412969289773056) naming macOS "Five GUIs" for its mix of UI frameworks.
