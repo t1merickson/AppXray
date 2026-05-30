@@ -41,7 +41,7 @@ BoltAI 2,AppKit; SwiftUI,Swift; Objective-C,,
 Bookmarx,AppKit; WebKit,Objective-C; Swift,,
 Boop,AppKit,Objective-C; Swift,,
 bpm,AppKit,Objective-C; Swift; C++,,
-Brave Browser,AppKit; CEF (Chromium),Objective-C; C++,,Chromium-based
+Brave Browser,AppKit; Chromium,Objective-C; C++,,Chromium-based browser
 Burst Photo,AppKit; SwiftUI,Objective-C; Swift; C++,,
 Byword,AppKit; WebKit,Objective-C,,
 Calibre,Qt,Python; C++,,Qt (PyQt); bundled Python
@@ -126,7 +126,7 @@ Fileloupe,AppKit,Objective-C; C++,,
 Final Cut Library Manager,AppKit,Objective-C,,Sparkle updater
 Final Cut Library Opener,AppKit; React Native,Objective-C; Swift; JavaScript,,Sparkle updater
 Final Cut Pro,AppKit; SwiftUI,Objective-C; Swift; C++,,
-Firefox,AppKit,Objective-C; C++; Rust,,Rust via WebRender/Stylo
+Firefox,AppKit; Gecko,Objective-C; C++; Rust,,Gecko engine; Rust via WebRender/Stylo
 FireStream,AppKit; SwiftUI,Objective-C; Swift,,
 Fission,AppKit,Objective-C,,Rogue Amoeba
 Focus Firewall,AppKit; SwiftUI,Objective-C; Swift; C++,,
@@ -154,7 +154,7 @@ GitHub Desktop,AppKit; Electron,Objective-C; JavaScript,,Electron-based
 GlueMotion,AppKit,Objective-C; Swift,,
 GOG Galaxy,AppKit; CEF (Chromium); Qt,Objective-C; C++; Python,,CEF-based
 GoodNotes,UIKit; SwiftUI; WebKit; Mac Catalyst,Objective-C; Swift; C++,,Mac Catalyst (iPad app on Mac)
-Google Chrome,AppKit; CEF (Chromium),Objective-C; C++,,Chromium-based
+Google Chrome,AppKit; Chromium,Objective-C; C++,,Chromium-based browser
 GoTo Opener,AppKit,Objective-C,,
 Grammarly for Safari,AppKit,Objective-C; Swift,,
 Hand Mirror,AppKit; SwiftUI,Objective-C; Swift,,
@@ -162,7 +162,7 @@ HandBrake,AppKit,Objective-C; C,,
 Hazel,AppKit,Objective-C,,
 HazeOver,AppKit,Objective-C; Swift,,
 HEIC Converter,AppKit; SwiftUI,Objective-C; Swift; C++,,
-Helium,AppKit,Objective-C; C++; JavaScript,,Chromium-based browser (Helium Framework)
+Helium,AppKit; Chromium,Objective-C; C++; JavaScript,,Chromium-based browser
 Help Indexer,AppKit,Objective-C,,
 Hex Fiend,AppKit,Objective-C,,
 Highlights,AppKit,Objective-C; Swift,,
@@ -377,7 +377,7 @@ Topaz JPEG to RAW AI,Qt,C++,,Qt
 Topaz Mask AI,Qt,C++,,Qt
 Topaz Sharpen AI,Qt,C++,,Qt
 Topaz Video Enhance AI,AppKit; Qt,C++,,Qt
-Tor Browser,,Objective-C; C++,,Gecko-based browser (Firefox)
+Tor Browser,AppKit; Gecko,Objective-C; C++,,Gecko engine (Firefox-based)
 Tot,AppKit,Objective-C; Swift,,
 Tower,AppKit; SwiftUI,Objective-C; Swift,,
 Tracktiq,AppKit; UIKit; WebKit,Objective-C; Swift,,
@@ -421,7 +421,7 @@ WorldWideWeb,AppKit,Objective-C; Swift,,
 Xcode,AppKit,Objective-C; Swift; C++,,
 XLD,AppKit,Objective-C,,
 xScope,AppKit; WebKit,Objective-C; C++,,Sparkle updater
-Zen,AppKit,Objective-C; C++; Rust; JavaScript,,Firefox/Gecko fork
+Zen,AppKit; Gecko,Objective-C; C++; Rust; JavaScript,,Gecko engine (Firefox fork)
 Zight,AppKit; SwiftUI; WebKit,Objective-C; Swift; C++,,
 Zoom,AppKit; WebKit,Objective-C; C++,,Native
 zoom.us,AppKit,Objective-C; C++,,
