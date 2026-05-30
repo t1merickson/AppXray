@@ -263,6 +263,22 @@ final class BundleFeatureDetectionOperation: ObservableObject {
         detected.insert(.cef)
         continue
       }
+      // Raw Chromium browsers ship the engine as "<Product> Framework.framework"
+      // (distinct from Electron and CEF, which are matched above).
+      if filename == "Google Chrome Framework.framework"
+      || filename == "Chromium Framework.framework"
+      || filename == "Brave Browser Framework.framework"
+      || filename == "Microsoft Edge Framework.framework"
+      || filename == "Vivaldi Framework.framework"
+      || (filename.hasPrefix("Opera") && filename.hasSuffix(" Framework.framework")) {
+        detected.insert(.chromium)
+        continue
+      }
+      // Gecko: Firefox-family browsers ship the XUL runtime as a library.
+      if filename == "libxul.dylib" || filename == "XUL.framework" {
+        detected.insert(.gecko)
+        continue
+      }
       // Flutter
       if filename == "FlutterMacOS.framework" {
         detected.insert(.flutter)
@@ -410,6 +426,14 @@ final class BundleFeatureDetectionOperation: ObservableObject {
     if fm.fileExists(atPath: resources.appendingPathComponent("capacitor.config.json").path) {
       detected.insert(.capacitor)
       detected.insert(.javascript)
+    }
+
+    // Gecko: Firefox-family browsers (Firefox, Tor, LibreWolf, ...) ship the
+    // XUL runtime in MacOS/ and packed resources as omni.ja.
+    if fm.fileExists(atPath: contents.appendingPathComponent("MacOS/XUL").path)
+    || fm.fileExists(atPath: resources.appendingPathComponent("omni.ja").path)
+    || fm.fileExists(atPath: resources.appendingPathComponent("browser/omni.ja").path) {
+      detected.insert(.gecko)
     }
 
     // Unity: globalgamemanagers

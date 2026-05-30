@@ -15,7 +15,7 @@ Sources/AppXray/
   BundleFeatureDetectionOperation.swift   Four-phase detection pipeline
 
   Model/
-    DetectedTechnologies.swift   OptionSet of 40 technology flags + display names + SF Symbol mappings + category groupings
+    DetectedTechnologies.swift   OptionSet of 42 technology flags + display names + SF Symbol mappings + category groupings
     ExecutableFileTechnologyInfo.swift   Aggregated results for a scanned bundle
     InfoDict.swift               Info.plist wrapper
     LoadBundleImage.swift        App icon loading
@@ -65,7 +65,7 @@ Supporting behavior:
 - **Security-scoped access** — the top-level dropped URL is wrapped in `startAccessingSecurityScopedResource()` (released via `defer`) so sandboxed bundle reads succeed; nested children share that access.
 - **Bare executables** — non-bundle Mach-O files go through `analyzeExecutableFile` (dependency + binary-string phases only).
 
-Results accumulate in a `DetectedTechnologies` OptionSet (a `UInt64` bitmask, 40 flags). Each flag has a `displayName` and a `symbolName` (SF Symbol) for the UI.
+Results accumulate in a `DetectedTechnologies` OptionSet (a `UInt64` bitmask, 42 flags). Each flag has a `displayName` and a `symbolName` (SF Symbol) for the UI.
 
 
 ### Window state flow

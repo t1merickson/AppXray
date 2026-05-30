@@ -25,6 +25,8 @@ AppXray groups its findings into four categories. Each detected technology is li
 | **iOS on Mac** | Unmodified iOS apps running on Apple Silicon |
 | **Electron** | Chromium + Node.js desktop shell (VS Code, Slack, …) |
 | **CEF (Chromium)** | Chromium Embedded Framework (Spotify, Steam, …) |
+| **Chromium** | Raw Chromium browsers (Chrome, Brave, Edge, Vivaldi) |
+| **Gecko** | Firefox-family browser engine (Firefox, Tor, LibreWolf) |
 | **NW.js** | node-webkit, Electron's older cousin |
 | **Flutter** | Google's cross-platform UI toolkit |
 | **Tauri** | Rust core + the system WebView |

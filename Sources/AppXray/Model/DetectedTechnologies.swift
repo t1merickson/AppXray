@@ -60,6 +60,8 @@ struct DetectedTechnologies: OptionSet, Sendable {
   static let javafx      = DetectedTechnologies(rawValue: 1 << 40)
   static let sparkle     = DetectedTechnologies(rawValue: 1 << 41)
   static let squirrel    = DetectedTechnologies(rawValue: 1 << 42)
+  static let chromium    = DetectedTechnologies(rawValue: 1 << 43)
+  static let gecko       = DetectedTechnologies(rawValue: 1 << 44)
 }
 
 // MARK: - Display Names
@@ -71,6 +73,7 @@ extension DetectedTechnologies {
     .carbon, .appkit, .automator, .webkit, .uikit, .swiftui, .iOSOnMac,
     .electron, .catalyst, .qt, .wxWidgets, .platypus, .cef, .flutter,
     .tauri, .reactNative, .capacitor, .wails, .gtk, .sdl, .nwjs, .javafx,
+    .chromium, .gecko,
     .objc, .swift, .cplusplus, .python, .java, .applescript, .rust, .javascript,
     .go, .kotlin,
     .unity, .godot, .unreal, .dotnet, .avalonia, .mono,
@@ -120,6 +123,8 @@ extension DetectedTechnologies {
     case .mono:         return "Mono"
     case .sparkle:      return "Sparkle"
     case .squirrel:     return "Squirrel"
+    case .chromium:     return "Chromium"
+    case .gecko:        return "Gecko (Firefox)"
     default:            return nil
     }
   }
@@ -172,6 +177,9 @@ extension DetectedTechnologies {
     // Distribution / Tooling
     case .sparkle:      return "sparkles"
     case .squirrel:     return "arrow.down.circle"
+    // Browser engines
+    case .chromium:     return "globe.americas"
+    case .gecko:        return "flame"
     default:            return "questionmark.app"
     }
   }
@@ -200,7 +208,7 @@ extension DetectedTechnologies {
     .appkit, .uikit, .swiftui, .webkit, .carbon, .automator,
     .electron, .catalyst, .qt, .wxWidgets, .cef, .flutter,
     .tauri, .reactNative, .capacitor, .platypus, .iOSOnMac,
-    .wails, .gtk, .sdl, .nwjs, .javafx,
+    .wails, .gtk, .sdl, .nwjs, .javafx, .chromium, .gecko,
   ]
 
   static let languageFlags: [DetectedTechnologies] = [

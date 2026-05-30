@@ -33,6 +33,12 @@ fileprivate struct Texts {
   static let cef =
     "Uses the Chromium Embedded Framework."
 
+  static let chromium =
+    "A Chromium-based browser. Google's browser engine under the hood."
+
+  static let gecko =
+    "A Gecko-based browser. Mozilla's Firefox engine under the hood."
+
   static let catalyst =
     "A Mac Catalyst app. Originally built for iOS."
 
@@ -150,7 +156,9 @@ fileprivate extension ExecutableFileTechnologyInfo {
       return Texts.electron
     }
 
-    if features(.cef) { return Texts.cef }
+    if features(.cef)      { return Texts.cef      }
+    if features(.chromium) { return Texts.chromium }
+    if features(.gecko)    { return Texts.gecko    }
 
     if (infoDictionary?.isAutomatorApplet ?? false) {
       return Texts.automatorApp
