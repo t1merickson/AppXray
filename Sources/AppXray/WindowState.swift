@@ -1,0 +1,69 @@
+//
+//  WindowState.swift
+//  AppXray
+//
+
+import SwiftUI
+
+final class WindowState: ObservableObject {
+
+  enum State: Equatable {
+    case empty
+    case loading(URL)
+    case notAnApp(URL)
+    case app(ExecutableFileTechnologyInfo)
+  }
+
+  @Published var state          = State.empty
+  @Published var detectionState : BundleFeatureDetectionOperation?
+
+  var url: URL? {
+    switch state {
+      case .empty: return nil
+      case .notAnApp(let url), .loading(let url): return url
+      case .app(let info): return info.fileURL
+    }
+  }
+
+  func loadURL(_ url: URL) {
+    self.detectionState?.cancel()
+    self.detectionState?.delegate = nil
+    self.detectionState = nil
+
+    self.state = .loading(url)
+    let detectionState = BundleFeatureDetectionOperation(url)
+    self.detectionState = detectionState
+
+    detectionState.delegate = self
+    detectionState.resume()
+  }
+
+  deinit {
+    // Window closed: stop any in-flight scan from doing further work.
+    detectionState?.cancel()
+    detectionState?.delegate = nil
+  }
+}
+
+extension WindowState: BundleFeatureDetectionOperationDelegate {
+
+  func detectionStateDidChange(_ state: BundleFeatureDetectionOperation) {
+    guard detectionState === state else { return }
+
+    switch state.state {
+      case .failedToOpen:
+        self.state = .empty
+        self.detectionState = nil
+
+      case .processing:
+        self.state = .loading(state.url)
+
+      case .finished:
+        self.state = .app(state.info)
+
+      case .notAnApplication:
+        self.state = .notAnApp(state.url)
+        self.detectionState = nil
+    }
+  }
+}

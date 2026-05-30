@@ -1,0 +1,169 @@
+App,Frameworks,Languages,Runtimes,Notes
+1Password,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Ableton Live,AppKit; WebKit; Qt,Objective-C; C++,,Qt bundled in Contents/Qt/lib
+Alfred,AppKit,Objective-C; Swift,,
+AmorphousDiskMark,AppKit,Objective-C,,
+Amphetamine,AppKit,Objective-C,,
+Audacity,wxWidgets,C++,,wxWidgets
+balenaEtcher,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Bartender 5,AppKit,Objective-C; Swift,,
+Base,AppKit; SwiftUI,Objective-C; Swift; C++,,
+BBEdit,AppKit,Objective-C; C++,,
+Bear,AppKit; SwiftUI,Swift; Objective-C,,
+Bike,AppKit,Objective-C,,
+Blender,,C++; Python,,Custom OpenGL UI; bundled Python
+BoltAI 2,AppKit; SwiftUI,Swift; Objective-C,,
+bpm,AppKit,Objective-C; Swift; C++,,
+Brave Browser,AppKit; CEF (Chromium),Objective-C; C++,,Chromium-based
+Calibre,Qt,Python; C++,,Qt (PyQt); bundled Python
+Carbon Copy Cloner,AppKit,Objective-C,,
+Cardhop,AppKit,Objective-C; Swift,,
+ChatGPT,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Claquette,AppKit; SwiftUI,Objective-C; Swift,,
+Claude,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+CleanMyMac,AppKit; SwiftUI,Objective-C; Swift; C++,,
+coconutBattery,AppKit,Objective-C,,
+Codex,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Compressor,AppKit,Objective-C; Swift; C++,,
+CotEditor,AppKit,Objective-C; Swift,,
+Cursor,AppKit; Electron,Objective-C; JavaScript,,Electron fork of VS Code
+Cyberduck,AppKit,Java; Objective-C,,JVM app via Rococoa bridge
+Cytrence Kiwi,AppKit,Objective-C; C++,,
+DaisyDisk,AppKit,Objective-C,,
+Dash,AppKit; WebKit,Objective-C,,
+Deliveries,AppKit; SwiftUI,Swift; Objective-C,,
+Discord,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Distill,AppKit; WebKit,Objective-C,,
+Docker,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Drafts,AppKit,Objective-C; Swift,,
+DriveDx,AppKit; Qt,Objective-C; C++,,Qt
+Duplicate File Finder,AppKit; SwiftUI; WebKit,Objective-C; Swift; C++,,
+EasyFind,AppKit,Objective-C,,
+Fantastical,AppKit; SwiftUI,Swift; Objective-C; C++,,
+Figma,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+File Juicer,AppKit; WebKit,Objective-C; Swift; C++,,
+Final Cut Pro,AppKit; SwiftUI,Objective-C; Swift; C++,,
+Firefox,AppKit,Objective-C; C++; Rust,,Rust via WebRender/Stylo
+Fission,AppKit,Objective-C,,Rogue Amoeba
+Focus Firewall,AppKit; SwiftUI,Objective-C; Swift; C++,,
+Folder Merger,AppKit,Objective-C,,
+Folder Quick Look,AppKit; SwiftUI,Objective-C; Swift,,
+Folders,AppKit; SwiftUI,Objective-C; Swift; C++,,
+Forklift,AppKit,Objective-C,,
+Ghostty,AppKit,Objective-C; Swift,,Zig compiled to native
+GlueMotion,AppKit,Objective-C; Swift,,
+Google Chrome,AppKit; CEF (Chromium),Objective-C; C++,,Chromium-based
+HandBrake,AppKit,Objective-C; C,,
+Hazel,AppKit,Objective-C,,
+HazeOver,AppKit,Objective-C; Swift,,
+HEIC Converter,AppKit; SwiftUI,Objective-C; Swift; C++,,
+Helium,AppKit,Objective-C; C++; JavaScript,,Chromium-based browser (Helium Framework)
+Hex Fiend,AppKit,Objective-C,,
+Highlights,AppKit,Objective-C; Swift,,
+Homerow,AppKit; SwiftUI,Swift; Objective-C,,
+Hopper Disassembler,AppKit; Qt,Objective-C; C++,,
+iA Writer,AppKit,Objective-C; Swift,,
+Ice Cubes,AppKit; SwiftUI,Swift; Objective-C,,Mastodon client
+Icon Composer,AppKit; SwiftUI,Objective-C; Swift,,
+IINA,AppKit,Objective-C; Swift,,
+ImageOptim,AppKit,Objective-C,,
+IntelliJ IDEA,,Java; Kotlin,,JetBrains JVM; Swing-based UI
+iStat Menus,AppKit,Objective-C,,
+iTerm,AppKit,Objective-C,,
+Ivory,AppKit; SwiftUI,Swift; Objective-C,,Mastodon client
+Kaleidoscope,AppKit,Objective-C; Swift,,
+Keka,AppKit,Objective-C,,
+Keynote,AppKit,Objective-C; Swift,,
+Krita,Qt,C++; Python,,Qt
+LaunchControl,AppKit,Objective-C,,
+Leech,AppKit,Objective-C,,
+LibreOffice,,C++; Python,,LibreOffice VCL toolkit; bundled Python; Java optional
+Linear,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Little Snitch,AppKit,Objective-C; C++,,
+Logic Pro,AppKit; SwiftUI; WebKit,Objective-C; Swift; C++,,
+Loopback,AppKit,Objective-C,,Rogue Amoeba
+love,AppKit,,,LÖVE game engine
+Macs Fan Control,AppKit; Qt,Objective-C; C++,,Qt
+MacWhisper,AppKit; SwiftUI,Swift; Objective-C,,
+Magic Disk Benchmark,AppKit; SwiftUI,Objective-C; Swift,,
+MarkEdit,AppKit; SwiftUI; WebKit,Swift; Objective-C; JavaScript,,
+Medis,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+MeetingBar,AppKit; SwiftUI,Swift; Objective-C,,
+Meta,AppKit,Objective-C; C++,,
+Mimestream,AppKit,Objective-C; Swift,,
+MindNode,AppKit,Objective-C; Swift,,
+Mist,AppKit; SwiftUI,Swift; Objective-C,,
+Mole,AppKit; SwiftUI,Objective-C; Swift,,
+Moom,AppKit,Objective-C,,
+Name Mangler,AppKit; WebKit,Objective-C,,
+NetNewsWire,AppKit; SwiftUI,Swift; Objective-C,,
+Network Utility,AppKit; SwiftUI,Objective-C; Swift; C++,,
+NotePlan,AppKit; SwiftUI,Swift; Objective-C,,
+Notion,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Nova,AppKit,Objective-C; Swift; C++,,Panic
+Numbers,AppKit,Objective-C; Swift,,
+OBS Studio,Qt,C++,,Qt
+Obsidian,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+OmniFocus,AppKit; SwiftUI,Objective-C; Swift,,
+OmniGraffle,AppKit,Objective-C; Swift,,
+OmniOutliner,AppKit,Objective-C; Swift,,
+OmniPlan,AppKit,Objective-C; Swift,,
+Overcast,AppKit; SwiftUI,Swift; Objective-C,,
+Pages,AppKit,Objective-C; Swift,,
+Paste,AppKit,Objective-C; Swift,,
+Patch Base,AppKit; SwiftUI,Objective-C; Swift; C++,,
+Path Finder,AppKit,Objective-C,,
+PDF Expert,AppKit,Objective-C; Swift,,
+Pencil,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Photomator,AppKit,Objective-C; Swift,,
+Pica,AppKit; SwiftUI,Objective-C; Swift,,
+Pixelmator Pro,AppKit,Objective-C; Swift; C++,,
+PopClip,AppKit; SwiftUI,Objective-C; Swift,,
+Prompt,AppKit,Objective-C; Swift,,Panic SSH client
+Proton Mail,AppKit; Mac Catalyst; UIKit,Objective-C; Swift,,Catalyst app
+ProtonVPN,AppKit; Mac Catalyst; UIKit,Objective-C; Swift,,Catalyst app
+Raycast,AppKit; SwiftUI,Swift; Objective-C,,
+ReadKit,AppKit; SwiftUI,Swift; Objective-C,,
+Reeder,AppKit; SwiftUI,Swift; Objective-C,,
+Safari,AppKit; WebKit,Objective-C; C++,,System app - limited detection
+SampleStack,AppKit; SwiftUI,Objective-C; Swift; C++,,
+Screens 5,AppKit,Objective-C; Swift,,
+SF Symbols,AppKit,Objective-C; Swift,,
+Signal,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+Sketch,AppKit,Objective-C; C++,,
+Slack,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+SnippetsLab,AppKit,Objective-C; Swift,,
+Soulver 3,AppKit,Objective-C; Swift,,
+SoundSource,AppKit,Objective-C,,Rogue Amoeba
+Spotify,AppKit; CEF (Chromium),Objective-C; C++,,CEF-based
+Spring,AppKit; SwiftUI,Swift; Objective-C,,
+SQLiteFlow,AppKit; SwiftUI,Objective-C; Swift,,
+Squash,AppKit,Objective-C; Swift,,
+Steam,AppKit,Objective-C; C++,,Valve
+Subler,AppKit,Objective-C,,
+Superconductor,AppKit,Objective-C; C++,,
+Syncthing,AppKit,Objective-C,,Go backend
+Tab Space,AppKit; SwiftUI,Swift; Objective-C,,
+Tailscale,AppKit; SwiftUI,Swift; Objective-C,,Go backend
+Telegram,AppKit,Objective-C; Swift; C++,,
+TestFlight,AppKit; SwiftUI,Swift; Objective-C,,
+The Unarchiver,AppKit,Objective-C,,
+Things3,AppKit,Objective-C,,
+Timing,AppKit; SwiftUI,Swift; Objective-C,,
+Tot,AppKit,Objective-C; Swift,,
+Tower,AppKit; SwiftUI,Objective-C; Swift,,
+Transmission,AppKit,Objective-C; C,,
+Transmit,AppKit,Objective-C; Swift,,Panic
+UlyssesMac,AppKit,Objective-C; Swift,,
+Unsqueeze,AppKit; SwiftUI,Objective-C; Swift; C++,,
+UTM,AppKit; SwiftUI,Swift; Objective-C; C++,,QEMU-based
+Visual Studio Code,AppKit; Electron,Objective-C; JavaScript,,Electron-based
+VLC,AppKit,Objective-C; C; C++,,
+waifu2x,AppKit; UIKit; SwiftUI; WebKit; Mac Catalyst,Objective-C; Swift; C++,,Mac Catalyst (iPad app)
+WhatsApp,AppKit; UIKit; SwiftUI; WebKit; Mac Catalyst,Objective-C; Swift; C++,,Mac Catalyst
+WireGuard,AppKit; SwiftUI,Swift; Objective-C,,
+Xcode,AppKit,Objective-C; Swift; C++,,
+XLD,AppKit,Objective-C,,
+Zen,AppKit,Objective-C; C++; Rust; JavaScript,,Firefox/Gecko fork
+Zight,AppKit; SwiftUI; WebKit,Objective-C; Swift; C++,,
+Zoom,AppKit; WebKit,Objective-C; C++,,Native
