@@ -300,9 +300,10 @@ final class BundleFeatureDetectionOperation: ObservableObject {
         detected.insert(.wxWidgets)
         continue
       }
-      // GTK
+      // GTK. Require an actual GTK/GDK library -- libglib-2.0 alone is NOT a
+      // GTK signal (Qt, GStreamer, and others bundle GLib without using GTK).
       if filename.hasPrefix("libgtk-3") || filename.hasPrefix("libgtk-4")
-      || filename.hasPrefix("libgdk-3") || filename.hasPrefix("libglib-2.0") {
+      || filename.hasPrefix("libgdk-3") || filename.hasPrefix("libgdk-4") {
         detected.insert(.gtk)
         continue
       }
