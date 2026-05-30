@@ -29,9 +29,8 @@ struct InfoPanel: View {
       Text(
         "Drop any macOS application to see what makes it tick. " +
         "AppXray scans the app bundle structure, linked libraries, " +
-        "and binary contents to identify frameworks like Electron, SwiftUI, " +
-        "and Qt, languages like Swift, Objective-C, and Rust, " +
-        "and runtimes like Unity and .NET."
+        "and binary contents to identify the 40+ frameworks, languages, " +
+        "runtimes, and tools behind it."
       )
         .font(.callout)
         .foregroundColor(.secondary)

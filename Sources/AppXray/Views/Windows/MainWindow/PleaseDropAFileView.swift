@@ -26,7 +26,7 @@ struct PleaseDropAFileView: View {
             .font(.title3)
             .fontWeight(.medium)
 
-          Text("Detects frameworks, languages, and runtimes including Electron, SwiftUI, Qt, Flutter, Unity, and more.")
+          Text("Detects 40+ frameworks, languages, runtimes, and tools.")
             .font(.callout)
             .foregroundColor(.secondary)
             .multilineTextAlignment(.center)
