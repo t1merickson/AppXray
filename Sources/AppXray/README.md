@@ -68,6 +68,27 @@ Supporting behavior:
 Results accumulate in a `DetectedTechnologies` OptionSet (a `UInt64` bitmask, 42 flags). Each flag has a `displayName` and a `symbolName` (SF Symbol) for the UI.
 
 
+### Detection signatures are versioned (era-aware)
+
+A technology's on-disk fingerprint changes over time, so **one flag often has several detection surfaces, indexed by era.** This is a deliberate design principle, not an accident:
+
+| Technology | Older surface | Newer surface |
+|------------|---------------|---------------|
+| Qt | `libQtCore` (Qt4), `QtCore.framework` | `libQt5Core`, `libQt6Core` |
+| GTK | `libgtk-x11-2.0` (GTK2) | `libgtk-3`, `libgtk-4` |
+| React Native | `React.framework` (JSC) | `hermes` / Fabric (New Architecture) |
+| .NET | Mono / Xamarin (`libmonosgen`) | CoreCLR (`libcoreclr`), single-file AppHost (`DOTNET_BUNDLE_EXTRACT_BASE_DIR`) |
+| Electron | framework name | `+ ElectronAsarIntegrity` plist key (Electron 18+) |
+| Browsers | CEF | raw Chromium (`<Product> Framework.framework`), Gecko (`XUL` / `omni.ja`) |
+
+Two rules follow from this:
+
+1. **Detection is additive, never exclusive.** The absence of a *newer* marker must not be read as "technology not present" — an app may simply predate it. Flags are only ever `insert`ed; one surface matching is enough.
+2. **A marker can be era-ambiguous.** The same filename can mean different things in different years (`libglib-2.0` once looked like a GTK signal but is really a general-purpose dependency). Prefer markers that are specific *across* eras.
+
+Practical corollary: any data we mine from a fixed snapshot (e.g. an app backup) describes the world *as of that snapshot's date*, not today. State findings as "as of ~YYYY, app X shipped with Y," never "app X no longer uses Y."
+
+
 ### Window state flow
 
 Each main window owns a `WindowState` (`ObservableObject`) that drives `ContentView`:

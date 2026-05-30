@@ -290,9 +290,11 @@ final class BundleFeatureDetectionOperation: ObservableObject {
         detected.insert(.javascript)
         continue
       }
-      // Qt: any Qt*.framework or libQt5*/libQt6* dylib
+      // Qt across eras: Qt*.framework (Qt4-6) or any libQt* dylib
+      // (libQtCore = Qt4, libQt5Core = Qt5, libQt6Core = Qt6). "libQt" is
+      // Qt-specific, so the broad prefix is safe.
       if (filename.hasPrefix("Qt") && filename.hasSuffix(".framework"))
-      || filename.hasPrefix("libQt5") || filename.hasPrefix("libQt6") {
+      || filename.hasPrefix("libQt") {
         detected.insert(.qt)
         continue
       }
@@ -316,10 +318,10 @@ final class BundleFeatureDetectionOperation: ObservableObject {
         detected.insert(.wxWidgets)
         continue
       }
-      // GTK. Require an actual GTK/GDK library -- libglib-2.0 alone is NOT a
-      // GTK signal (Qt, GStreamer, and others bundle GLib without using GTK).
-      if filename.hasPrefix("libgtk-3") || filename.hasPrefix("libgtk-4")
-      || filename.hasPrefix("libgdk-3") || filename.hasPrefix("libgdk-4") {
+      // GTK across eras: libgtk-/libgdk- covers GTK2 (libgtk-x11-2.0), GTK3,
+      // and GTK4. Require an actual GTK/GDK library -- libglib-2.0 alone is NOT
+      // a GTK signal (Qt, GStreamer, and others bundle GLib without using GTK).
+      if filename.hasPrefix("libgtk-") || filename.hasPrefix("libgdk-") {
         detected.insert(.gtk)
         continue
       }
@@ -778,6 +780,7 @@ extension DetectedTechnologies {
       if check(.swiftui,   "SwiftUI.framework")            { continue }
       if check(.uikit,     "UIKit.framework")              { continue }
       if check(.qt,        "QtCore.framework")             { continue }
+      if check(.qt,        "libQtCore")                    { continue } // Qt4
       if check(.qt,        "libQt5Core")                   { continue }
       if check(.qt,        "libQt6Core")                   { continue }
       if check(.webkit,    "WebKit.framework")             { continue }
