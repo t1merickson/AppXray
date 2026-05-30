@@ -1,11 +1,8 @@
-<h2>5 GUIs
-  <img src="5GUIs/Assets.xcassets/AppIcon.appiconset/5GUIs-256.png"
-           align="right" width="128" height="128" />
-</h2>
+# AppXray
 
 Drop any macOS application to see what makes it tick.
 
-5 GUIs scans app bundle structure, linked libraries, and binary contents to identify the frameworks, languages, and runtimes behind any `.app`.
+AppXray scans app bundle structure, linked libraries, and binary contents to identify the frameworks, languages, and runtimes behind any `.app`.
 
 ### What it detects
 
@@ -27,7 +24,7 @@ Detection runs through a four-phase pipeline, ordered from fast to slow:
 3. **Dependency analysis** -- runs LLVM [`objdump`](https://en.wikipedia.org/wiki/Objdump) on the main executable and walks transitive dependencies looking for linked frameworks and libraries
 4. **Binary string analysis** -- searches for embedded strings as a last resort (currently used for Tauri/Rust when library linking is ambiguous)
 
-5 GUIs itself is a SwiftUI macOS application using an AppKit lifecycle (AppDelegate + storyboard menus). It targets macOS 12+.
+AppXray itself is a SwiftUI macOS application using an AppKit lifecycle (AppDelegate + storyboard menus). It targets macOS 12+.
 
 
 ### 3rd party software
@@ -43,7 +40,7 @@ An `llvm-objdump` binary needs to be present in the `LLVM` folder before buildin
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-objdump
 ```
 
-Copy or symlink it into `LLVM/`, then open `5GUIs.xcodeproj` and build.
+Copy or symlink it into `LLVM/`, then open `AppXray.xcodeproj` and build.
 
 
 ### Origin
