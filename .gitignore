@@ -17,3 +17,6 @@ Package.resolved
 
 LLVM/llvm-objdump
 
+
+# Local app-inventory report from on-disk backup (privacy: not for public repo)
+BACKUP_APP_DETECTIONS.md
