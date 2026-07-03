@@ -135,7 +135,7 @@ fileprivate struct Texts {
 
 import Foundation
 
-fileprivate extension ExecutableFileTechnologyInfo {
+extension ExecutableFileTechnologyInfo {
 
   var summaryText: String {
     summaryTextTemplate

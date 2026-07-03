@@ -243,7 +243,7 @@ final class BundleFeatureDetectionOperation: ObservableObject {
 
   /// Scans the bundle directory structure for framework and file markers.
   /// This is the fastest detection phase -- pure filesystem checks.
-  private func processDirectoryContents(_ url: URL) -> DetectedTechnologies {
+  func processDirectoryContents(_ url: URL) -> DetectedTechnologies {
     var detected = DetectedTechnologies()
     let contents = url.appendingPathComponent("Contents")
 
@@ -516,7 +516,7 @@ final class BundleFeatureDetectionOperation: ObservableObject {
   // MARK: - Phase 2: Info.plist Analysis
 
   /// Extracts technology signals from the parsed Info.plist.
-  private func processInfoDict(_ info: InfoDict) -> DetectedTechnologies {
+  func processInfoDict(_ info: InfoDict) -> DetectedTechnologies {
     var detected = DetectedTechnologies()
 
     // Electron plist keys
@@ -553,7 +553,7 @@ final class BundleFeatureDetectionOperation: ObservableObject {
   // MARK: - Platform Detection
 
   /// Determines the platform type based on Info.plist and bundle structure.
-  private func determinePlatform(info: InfoDict, bundleURL: URL) -> PlatformType {
+  func determinePlatform(info: InfoDict, bundleURL: URL) -> PlatformType {
     // iOS app on Mac (via Wrapper/)
     if fm.fileExists(atPath: bundleURL.appendingPathComponent("Wrapper").path) {
       return .iOS
@@ -615,8 +615,8 @@ final class BundleFeatureDetectionOperation: ObservableObject {
   /// Skipped when a definitive heavy framework is already known -- those stacks
   /// never coincide with the string-only ones, and skipping keeps the common
   /// Electron/Chromium/Unity case fast.
-  private func binaryStringFeatures(_ executableURL: URL,
-                                    current: DetectedTechnologies) -> DetectedTechnologies
+  func binaryStringFeatures(_ executableURL: URL,
+                            current: DetectedTechnologies) -> DetectedTechnologies
   {
     let definitive: DetectedTechnologies = [
       .electron, .cef, .flutter, .unity, .unreal,
@@ -682,7 +682,7 @@ final class BundleFeatureDetectionOperation: ObservableObject {
   /// Extracts printable ASCII strings from binary data, similar to `strings(1)`.
   /// Indexes via `withUnsafeBytes`, so it is correct regardless of the Data's
   /// `startIndex` (e.g. if a slice is ever passed in).
-  private func extractPrintableStrings(from data: Data) -> String {
+  func extractPrintableStrings(from data: Data) -> String {
     var result = ""
     result.reserveCapacity(data.count / 4)
 
