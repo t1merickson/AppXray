@@ -15,10 +15,10 @@ your row when done.
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
 | 001 | Detection engine test baseline (unit-test target + fixtures) | P1 | M | — | DONE (60 tests; executor: Codex, reviewed) |
-| 002 | Fix React Native false positive (Reactive* ≠ React) | P1 | S | 001 | TODO |
+| 002 | Fix React Native false positive (Reactive* ≠ React) | P1 | S | 001 | DONE (executor: Codex, reviewed) |
 | 003 | Skip objdump spawns on nonexistent (dyld-cache) system libs | P1 | S | — | DONE (executor: Codex, reviewed) |
-| 004 | Add repo-level CLAUDE.md (commands + detection doctrine) | P2 | S | 001 | TODO |
-| 005 | GitHub Actions CI: build + test on push | P2 | S | 001 | TODO |
+| 004 | Add repo-level CLAUDE.md (commands + detection doctrine) | P2 | S | 001 | DONE (executor: Codex, reviewed) |
+| 005 | GitHub Actions CI: build + test on push | P2 | S | 001 | DONE (executor: Codex, reviewed; also shared the AppXray scheme — it was user-local only, a plan-001/005 blind spot) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
