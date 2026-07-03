@@ -110,6 +110,13 @@ private func run(objdump: String, against url: URL,
       continue
     }
 
+    // System libraries (/usr/lib, /System/Library) have lived only in the
+    // dyld shared cache since macOS 11 -- there is no file to objdump, so
+    // don't pay a doomed process spawn. Their names are already in `result`.
+    guard FileManager.default.fileExists(atPath: dependencyURL.path) else {
+      continue
+    }
+
     do {
       try run(objdump: objdump, against: dependencyURL,
               nesting: nesting + 1, maxNesting: maxNesting,
