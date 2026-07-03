@@ -304,10 +304,15 @@ final class BundleFeatureDetectionOperation: ObservableObject {
         detected.insert(.javascript)
         continue
       }
-      // React Native -- exact frameworks plus case-insensitive Hermes / React*
+      // React Native across eras: React.framework (classic/JSC), split pods
+      // (React-Core, React-RCTText, ...), ReactCommon, and Hermes (New
+      // Architecture). "Reactive*" (ReactiveCocoa/Swift/ObjC) is an unrelated
+      // FRP family and must NOT match.
       if filename == "React.framework"
-      || filename == "React-Core.framework"
-      || filename.hasPrefix("React")
+      || filename.hasPrefix("React-")
+      || filename.hasPrefix("React_")
+      || filename.hasPrefix("ReactCommon")
+      || filename.hasPrefix("ReactNative")
       || filename.lowercased().hasPrefix("hermes") {
         detected.insert(.reactNative)
         detected.insert(.javascript)

@@ -113,11 +113,64 @@ final class DirectoryScanTests: XCTestCase {
     XCTAssertTrue(detected.contains(.javascript))
   }
 
-  func testHermesFrameworkDetectsReactNative() throws {
+  func testReactCoreFrameworkDetectsReactNativeAndJavaScript() throws {
+    let fixture = try makeFixture()
+    try fixture.touch("Contents/Frameworks/React-Core.framework")
+
+    let detected = scan(fixture)
+
+    XCTAssertTrue(detected.contains(.reactNative))
+    XCTAssertTrue(detected.contains(.javascript))
+  }
+
+  func testReactCommonFrameworkDetectsReactNativeAndJavaScript() throws {
+    let fixture = try makeFixture()
+    try fixture.touch("Contents/Frameworks/ReactCommon.framework")
+
+    let detected = scan(fixture)
+
+    XCTAssertTrue(detected.contains(.reactNative))
+    XCTAssertTrue(detected.contains(.javascript))
+  }
+
+  func testHermesFrameworkDetectsReactNativeAndJavaScript() throws {
     let fixture = try makeFixture()
     try fixture.touch("Contents/Frameworks/Hermes.framework")
 
-    XCTAssertTrue(scan(fixture).contains(.reactNative))
+    let detected = scan(fixture)
+
+    XCTAssertTrue(detected.contains(.reactNative))
+    XCTAssertTrue(detected.contains(.javascript))
+  }
+
+  func testReactiveCocoaFrameworkDoesNotDetectReactNativeOrJavaScript() throws {
+    let fixture = try makeFixture()
+    try fixture.touch("Contents/Frameworks/ReactiveCocoa.framework")
+
+    let detected = scan(fixture)
+
+    XCTAssertFalse(detected.contains(.reactNative))
+    XCTAssertFalse(detected.contains(.javascript))
+  }
+
+  func testReactiveSwiftFrameworkDoesNotDetectReactNativeOrJavaScript() throws {
+    let fixture = try makeFixture()
+    try fixture.touch("Contents/Frameworks/ReactiveSwift.framework")
+
+    let detected = scan(fixture)
+
+    XCTAssertFalse(detected.contains(.reactNative))
+    XCTAssertFalse(detected.contains(.javascript))
+  }
+
+  func testReactiveObjCFrameworkDoesNotDetectReactNativeOrJavaScript() throws {
+    let fixture = try makeFixture()
+    try fixture.touch("Contents/Frameworks/ReactiveObjC.framework")
+
+    let detected = scan(fixture)
+
+    XCTAssertFalse(detected.contains(.reactNative))
+    XCTAssertFalse(detected.contains(.javascript))
   }
 
   func testSparkleFrameworkDetectsSparkle() throws {
