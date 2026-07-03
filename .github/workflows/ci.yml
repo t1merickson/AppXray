@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Provide llvm-objdump (gitignored build prerequisite)
+        run: cp "$(xcrun --find llvm-objdump)" LLVM/llvm-objdump
+
+      - name: Build
+        run: |
+          xcodebuild -project AppXray.xcodeproj -scheme AppXray \
+            -configuration Debug build
+
+      - name: Test
+        run: |
+          xcodebuild test -project AppXray.xcodeproj -scheme AppXrayTests
